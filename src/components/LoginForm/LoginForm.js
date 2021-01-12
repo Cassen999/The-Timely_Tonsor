@@ -80,7 +80,7 @@ class LoginForm extends Component {
 
     return (
       <form className="formPanel" onSubmit={this.login}>
-        <h2>Login</h2>
+        <h2 className="formPanelTitle">Login</h2>
         {this.props.store.errors.loginMessage && (
           <h3 className="alert" role="alert">
             {this.props.store.errors.loginMessage}
