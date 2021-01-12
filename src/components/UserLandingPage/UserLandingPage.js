@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import LogOutButtonStyled from '../LogOutButtonStyled/LogOutButtonStyled';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -165,7 +165,7 @@ class UserLandingPage extends Component {
         </div>
         </form>
         <div>
-          <LogOutButton className="log-in" />
+          <LogOutButtonStyled className="log-in" />
         </div>
       </div>
       );
