@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -19,7 +18,7 @@ const styles = (theme) => ({
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    width: 300
+    width: 300,
   },
   container: {
     display: 'flex',
@@ -78,9 +77,9 @@ class UserLandingPage extends Component {
           </p>
         </div>
         <div className={classes.root}>
-        <Grid container spacing={3}
+        <Grid container spacing={6}
           alignItems="center"
-          justify="space-evenly">
+          justify="center">
           <Grid item xs={6} className={classes.gridItem}>
             <Paper className={classes.paper}>
               <TextField
@@ -117,7 +116,7 @@ class UserLandingPage extends Component {
                 />
             </Paper>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} className={classes.gridItem}>
             <Paper className={classes.paper}>
               <TextField
                   id="standard-name"
