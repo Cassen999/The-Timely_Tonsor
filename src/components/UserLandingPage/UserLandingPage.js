@@ -104,7 +104,8 @@ class UserLandingPage extends Component {
               <Paper className={classes.paper}>
                 <TextField
                   id="standard-name"
-                  placeholder={this.props.store.user.username}
+                  helperText="Username"
+                  placeholder= {this.props.store.user.username}
                   className={classes.textField}
                   value={this.state.username}
                   onChange={this.handleInputChangeFor('username')}
@@ -116,6 +117,7 @@ class UserLandingPage extends Component {
               <Paper className={classes.paper}>
                 <TextField
                     id="standard-name"
+                    helperText="First Name"
                     placeholder={this.props.store.user.first_name}
                     className={classes.textField}
                     value={this.state.first_name}
@@ -128,6 +130,7 @@ class UserLandingPage extends Component {
               <Paper className={classes.paper}>
                 <TextField
                     id="standard-name"
+                    helperText="Last Name"
                     placeholder={this.props.store.user.last_name}
                     className={classes.textField}
                     value={this.state.last_name}
@@ -140,6 +143,7 @@ class UserLandingPage extends Component {
               <Paper className={classes.paper}>
                 <TextField
                     id="standard-name"
+                    helperText="Phone Number"
                     placeholder={this.props.store.user.phone_number}
                     className={classes.textField}
                     value={this.state.phone_number}
