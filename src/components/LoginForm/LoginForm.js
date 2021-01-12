@@ -106,7 +106,7 @@ class LoginForm extends Component {
             className={classes.textField}
             value={this.state.password}
             onChange={this.handleInputChangeFor('password')}
-            margin="normal"
+            margin="dense"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
