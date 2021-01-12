@@ -2,6 +2,22 @@
 Grid
 -------------------------------------------------------------------------------- */
 
+.container {
+  color: rgb(179, 178, 178);
+}
+
+.formPanelTitle {
+  color: black;
+}
+
+.shopName {
+  color: black;
+}
+
+h2 {
+  color:rgb(179, 178, 178);
+}
+
 .grid {
   display: flex;
   flex: 0 1 auto;
