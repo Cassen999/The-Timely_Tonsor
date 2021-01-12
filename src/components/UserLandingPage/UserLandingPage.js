@@ -6,10 +6,24 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 
 const styles = (theme) => ({
   root: {
     flexGrow: 1,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+  iconSmall: {
+    fontSize: 20,
   },
   gridItem: {
     flexBasis: 0,
@@ -35,18 +49,9 @@ const styles = (theme) => ({
   menu: {
     width: 200,
   },
-  button: {
-    margin: theme.spacing.unit,
-  },
-  leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-  iconSmall: {
-    fontSize: 20,
-  },
+  buttonContainer: {
+    float: 'right'
+  }
 });
 
 class UserLandingPage extends Component {
@@ -64,6 +69,20 @@ class UserLandingPage extends Component {
     });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('in user update')
+    // this.props.dispatch({
+    //   type: 'UPDATE_USER',
+    //   payload: {
+    //     username: this.state.username,
+    //     first_name: this.state.first_name,
+    //     last_name: this.state.last_name,
+    //     phone_number: this.state.phone_number,
+    //   },
+    // });
+  };
+
   render() {
     const classes = this.props.classes;
     return (
@@ -76,64 +95,79 @@ class UserLandingPage extends Component {
             field and press Update to update that information
           </p>
         </div>
+        <form onSubmit={this.handleSubmit}>
         <div className={classes.root}>
-        <Grid container spacing={6}
-          alignItems="center"
-          justify="center">
-          <Grid item xs={6} className={classes.gridItem}>
-            <Paper className={classes.paper}>
-              <TextField
-                id="standard-name"
-                placeholder={this.props.store.user.username}
-                className={classes.textField}
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-                margin="normal"
-              />
-            </Paper>
-          </Grid>
-          <Grid item xs={6} className={classes.gridItem}>
-            <Paper className={classes.paper}>
-              <TextField
+          <Grid container spacing={6}
+            alignItems="center"
+            justify="center">
+            <Grid item xs={6} className={classes.gridItem}>
+              <Paper className={classes.paper}>
+                <TextField
                   id="standard-name"
-                  placeholder={this.props.store.user.first_name}
+                  placeholder={this.props.store.user.username}
                   className={classes.textField}
-                  value={this.state.first_name}
-                  onChange={this.handleInputChangeFor('first_name')}
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
                   margin="normal"
                 />
-            </Paper>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} className={classes.gridItem}>
+              <Paper className={classes.paper}>
+                <TextField
+                    id="standard-name"
+                    placeholder={this.props.store.user.first_name}
+                    className={classes.textField}
+                    value={this.state.first_name}
+                    onChange={this.handleInputChangeFor('first_name')}
+                    margin="normal"
+                  />
+              </Paper>
+            </Grid>
+            <Grid item xs={6} className={classes.gridItem}>
+              <Paper className={classes.paper}>
+                <TextField
+                    id="standard-name"
+                    placeholder={this.props.store.user.last_name}
+                    className={classes.textField}
+                    value={this.state.last_name}
+                    onChange={this.handleInputChangeFor('last_name')}
+                    margin="normal"
+                  />
+              </Paper>
+            </Grid>
+            <Grid item xs={6} className={classes.gridItem}>
+              <Paper className={classes.paper}>
+                <TextField
+                    id="standard-name"
+                    placeholder={this.props.store.user.phone_number}
+                    className={classes.textField}
+                    value={this.state.phone_number}
+                    onChange={this.handleInputChangeFor('phone_number')}
+                    margin="normal"
+                  />
+              </Paper>
+            </Grid>
           </Grid>
-          <Grid item xs={6} className={classes.gridItem}>
-            <Paper className={classes.paper}>
-              <TextField
-                  id="standard-name"
-                  placeholder={this.props.store.user.last_name}
-                  className={classes.textField}
-                  value={this.state.last_name}
-                  onChange={this.handleInputChangeFor('last_name')}
-                  margin="normal"
-                />
-            </Paper>
-          </Grid>
-          <Grid item xs={6} className={classes.gridItem}>
-            <Paper className={classes.paper}>
-              <TextField
-                  id="standard-name"
-                  placeholder={this.props.store.user.phone_number}
-                  className={classes.textField}
-                  value={this.state.phone_number}
-                  onChange={this.handleInputChangeFor('phone_number')}
-                  margin="normal"
-                />
-            </Paper>
-          </Grid>
-        </Grid>
-      </div>
-          <div>
-            <LogOutButton className="log-in" />
-          </div>
         </div>
+        <div className={classes.buttonContainer}>
+          <Button 
+            color="primary"
+            classname="btn"
+            type="submit"
+            variant="contained" 
+            size="small" 
+            value="Register"
+            className={classes.button}>
+            <SaveIcon className={classes.leftIcon, classes.iconSmall} />
+            Save
+          </Button>
+        </div>
+        </form>
+        <div>
+          <LogOutButton className="log-in" />
+        </div>
+      </div>
       );
     }
   }
