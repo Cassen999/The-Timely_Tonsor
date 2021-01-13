@@ -58,22 +58,22 @@ const styles = (theme) => ({
 class UserLandingPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   state = {
-    username: '',
-    first_name: '',
-    last_name: '',
-    phone_number: '',
+    username: this.props.store.user.username,
+    first_name: this.props.store.user.first_name,
+    last_name: this.props.store.user.last_name,
+    phone_number: this.props.store.user.phone_number,
   };
 
-  componentDidMount() {
-    if(this.props.store.user.first_name) {
-      this.setState({
-        username: this.props.store.user.username,
-        first_name: this.props.store.user.first_name,
-        last_name: this.props.store.user.last_name,
-        phone_number: this.props.store.user.phone_number,
-      })
-    }
-  }
+  // componentDidMount() {
+  //   if(this.props.store.user.first_name) {
+  //     this.setState({
+  //       username: this.props.store.user.username,
+  //       first_name: this.props.store.user.first_name,
+  //       last_name: this.props.store.user.last_name,
+  //       phone_number: this.props.store.user.phone_number,
+  //     })
+  //   }
+  // }
   
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
@@ -87,9 +87,15 @@ class UserLandingPage extends Component {
     this.props.dispatch({
       type: 'UPDATE_USER',
       payload: this.state});
-    this.props.history.push('/user');
+    this.props.history.push(`/user`);
   };
 
+  handleRedirectScheduler = (event, id) => {
+    event.preventDefault()
+    console.log('In handleRedirect, id: ', id)
+    this.props.history.push(`/scheduling/${id}`)
+  }
+  
   render() {
     const classes = this.props.classes;
     return (
@@ -173,6 +179,17 @@ class UserLandingPage extends Component {
         </form>
         <div>
           <LogOutButtonStyled className="log-in" />
+        </div>
+        <div>
+          <Button 
+            onClick={(event) => this.handleRedirectScheduler(event, this.props.store.user.id)}
+            color="primary"
+            variant="contained" 
+            size="large" 
+            className={classes.button}>
+            <SaveIcon className={classes.leftIcon, classes.iconSmall} />
+            Make an Appointment
+          </Button>
         </div>
       </div>
       );
