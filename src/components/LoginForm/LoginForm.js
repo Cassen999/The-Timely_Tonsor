@@ -89,7 +89,6 @@ class LoginForm extends Component {
           <div>
             <TextField
               required
-              id="standard-name"
               placeholder="Username"
               className={classes.textField}
               value={this.state.username}
@@ -101,7 +100,6 @@ class LoginForm extends Component {
           <Input
             required
             type={this.state.showPassword ? 'text' : 'password'}
-            id="standard-name"
             placeholder="Password"
             className={classes.textField}
             value={this.state.password}

@@ -99,7 +99,6 @@ class RegisterForm extends Component {
         <div>
             <TextField
               required
-              id="standard-name"
               label="Desired Username"
               className={classes.textField}
               value={this.state.username}
@@ -111,7 +110,6 @@ class RegisterForm extends Component {
           <Input
               required
               type={this.state.showPassword ? 'text' : 'password'}
-              id="standard-name"
               placeholder="Desired Password"
               className={classes.textField}
               value={this.state.password}
@@ -131,7 +129,6 @@ class RegisterForm extends Component {
         <div>
           <TextField
             required
-            id="standard-name"
             label="First Name"
             className={classes.textField}
             value={this.state.first_name}
@@ -142,7 +139,6 @@ class RegisterForm extends Component {
         <div>
           <TextField
             required
-            id="standard-name"
             label="Last Name"
             className={classes.textField}
             value={this.state.last_name}
@@ -153,7 +149,6 @@ class RegisterForm extends Component {
         <div>
         <TextField
             required
-            id="standard-name"
             label="Phone 5555555555"
             className={classes.textField}
             value={this.state.phone_number}

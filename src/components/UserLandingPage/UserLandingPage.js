@@ -54,6 +54,7 @@ const styles = (theme) => ({
   }
 });
 
+
 class UserLandingPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   state = {
@@ -63,24 +64,29 @@ class UserLandingPage extends Component {
     phone_number: '',
   };
 
+  componentDidMount() {
+    if(this.props.store.user.first_name) {
+      this.setState({
+        username: this.props.store.user.username,
+        first_name: this.props.store.user.first_name,
+        last_name: this.props.store.user.last_name,
+        phone_number: this.props.store.user.phone_number,
+      })
+    }
+  }
+  
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   };
 
-  handleSubmit = (event) => {
+  handleUserUpdate = (event) => {
     event.preventDefault();
     console.log('in user update')
-    // this.props.dispatch({
-    //   type: 'UPDATE_USER',
-    //   payload: {
-    //     username: this.state.username,
-    //     first_name: this.state.first_name,
-    //     last_name: this.state.last_name,
-    //     phone_number: this.state.phone_number,
-    //   },
-    // });
+    this.props.dispatch({
+      type: 'UPDATE_USER',
+      payload: this.state});
   };
 
   render() {
@@ -95,7 +101,7 @@ class UserLandingPage extends Component {
             field and press Update to update that information
           </p>
         </div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleUserUpdate}>
         <div className={classes.root}>
           <Grid container spacing={6}
             alignItems="center"
@@ -103,8 +109,8 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                  id="standard-name"
-                  placeholder={this.props.store.user.username}
+                  helperText="Username"
+                  placeholder= {this.props.store.user.username}
                   className={classes.textField}
                   value={this.state.username}
                   onChange={this.handleInputChangeFor('username')}
@@ -115,7 +121,7 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                    id="standard-name"
+                    helperText="First Name"
                     placeholder={this.props.store.user.first_name}
                     className={classes.textField}
                     value={this.state.first_name}
@@ -127,7 +133,7 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                    id="standard-name"
+                    helperText="Last Name"
                     placeholder={this.props.store.user.last_name}
                     className={classes.textField}
                     value={this.state.last_name}
@@ -139,7 +145,7 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                    id="standard-name"
+                    helperText="Phone Number"
                     placeholder={this.props.store.user.phone_number}
                     className={classes.textField}
                     value={this.state.phone_number}
@@ -153,7 +159,7 @@ class UserLandingPage extends Component {
         <div className={classes.buttonContainer}>
           <Button 
             color="primary"
-            classname="btn"
+            className="btn"
             type="submit"
             variant="contained" 
             size="small" 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const LogOutButton = (props) => (
   <button
