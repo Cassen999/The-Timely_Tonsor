@@ -26,8 +26,8 @@ function* fetchUser() {
 
 function* updateUser(action) {
   try {
-    console.log('Update saga success')
-    yield axios.put('/api/user/:id', action.payload.id)
+    console.log('Update saga success', action.payload.id)
+    yield axios.put(`/api/user/id`, action.payload)
     yield fetchUser();
   }
   catch(error) {

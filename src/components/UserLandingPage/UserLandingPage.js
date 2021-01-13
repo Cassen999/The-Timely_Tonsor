@@ -66,7 +66,12 @@ class UserLandingPage extends Component {
 
   componentDidMount() {
     if(this.props.store.user.first_name) {
-      this.setState([...state])
+      this.setState({
+        username: this.props.store.user.username,
+        first_name: this.props.store.user.first_name,
+        last_name: this.props.store.user.last_name,
+        phone_number: this.props.store.user.phone_number,
+      })
     }
   }
   
@@ -104,7 +109,6 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                  id="standard-name"
                   helperText="Username"
                   placeholder= {this.props.store.user.username}
                   className={classes.textField}
@@ -117,7 +121,6 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                    id="standard-name"
                     helperText="First Name"
                     placeholder={this.props.store.user.first_name}
                     className={classes.textField}
@@ -130,7 +133,6 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                    id="standard-name"
                     helperText="Last Name"
                     placeholder={this.props.store.user.last_name}
                     className={classes.textField}
@@ -143,7 +145,6 @@ class UserLandingPage extends Component {
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <TextField
-                    id="standard-name"
                     helperText="Phone Number"
                     placeholder={this.props.store.user.phone_number}
                     className={classes.textField}
@@ -158,7 +159,7 @@ class UserLandingPage extends Component {
         <div className={classes.buttonContainer}>
           <Button 
             color="primary"
-            classname="btn"
+            className="btn"
             type="submit"
             variant="contained" 
             size="small" 

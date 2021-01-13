@@ -11,6 +11,7 @@ const router = express.Router();
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
+  console.log('req.user', req.user)
   res.send(req.user);
 });
 
@@ -53,13 +54,14 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-router.put('id', (req,res) => {
-  let id = params.id;
-  const sqlText = `UPDATE "user" SET (username, first_name,
-    last_name, phone_number) WHERE id=${id}
-    VALUES ($1, $2, $3, $4) 
+router.put('/:id', (req,res) => {
+  console.log('In router.put')
+  let id = req.params.id;
+  console.log('params', req.params)
+  const sqlText = `UPDATE "user" SET username=$1, first_name=$2,
+    last_name=$3, phone_number=$4 WHERE id=${id} 
     RETURNING id`
-  pool.query(sqlText, [id])
+  pool.query(sqlText, [req.body.username, req.body.first_name, req.body.last_name, req.body.phone_number])
   .then((result) => {
     res.send(result.rows)
   })
