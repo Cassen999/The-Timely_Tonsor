@@ -87,6 +87,7 @@ class UserLandingPage extends Component {
     this.props.dispatch({
       type: 'UPDATE_USER',
       payload: this.state});
+    this.props.history.push('/user');
   };
 
   render() {
