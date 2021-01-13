@@ -4,6 +4,10 @@ const userReducer = (state = {}, action) => {
       return action.payload;
     case 'UNSET_USER':
       return {};
+    case 'UPDATE_USER':
+      return state.map((user) => 
+        user.id === action.payload.id ? action.payload : user
+      );
     default:
       return state;
   }

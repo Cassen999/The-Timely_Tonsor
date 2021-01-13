@@ -53,4 +53,20 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('id', (req,res) => {
+  let id = params.id;
+  const sqlText = `UPDATE "user" SET (username, first_name,
+    last_name, phone_number) WHERE id=${id}
+    VALUES ($1, $2, $3, $4) 
+    RETURNING id`
+  pool.query(sqlText, [id])
+  .then((result) => {
+    res.send(result.rows)
+  })
+  .catch((error) => {
+    console.log('Error in router.post', error)
+    res.sendStatus(500)
+  })
+})
+
 module.exports = router;

@@ -54,6 +54,7 @@ const styles = (theme) => ({
   }
 });
 
+
 class UserLandingPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
   state = {
@@ -63,24 +64,24 @@ class UserLandingPage extends Component {
     phone_number: '',
   };
 
+  componentDidMount() {
+    if(this.props.store.user.first_name) {
+      this.setState([...state])
+    }
+  }
+  
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   };
 
-  handleSubmit = (event) => {
+  handleUserUpdate = (event) => {
     event.preventDefault();
     console.log('in user update')
-    // this.props.dispatch({
-    //   type: 'UPDATE_USER',
-    //   payload: {
-    //     username: this.state.username,
-    //     first_name: this.state.first_name,
-    //     last_name: this.state.last_name,
-    //     phone_number: this.state.phone_number,
-    //   },
-    // });
+    this.props.dispatch({
+      type: 'UPDATE_USER',
+      payload: this.state});
   };
 
   render() {
@@ -95,7 +96,7 @@ class UserLandingPage extends Component {
             field and press Update to update that information
           </p>
         </div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleUserUpdate}>
         <div className={classes.root}>
           <Grid container spacing={6}
             alignItems="center"
