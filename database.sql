@@ -31,29 +31,36 @@ CREATE TABLE appointment_slots (
 );
 
 
+INSERT INTO "user_appointment" ("user_id", "barber_id", "date", "dotw", "time")
+VALUES (5, 4, '2021-01-13', 'Wednesday', 9);
+INSERT INTO "user_appointment" ("user_id", "barber_id", "date", "dotw", "time")
+VALUES (6, 3, '2021-01-13', 'Wednesday', 9);
+INSERT INTO "user_appointment" ("user_id", "barber_id", "date", "dotw", "time")
+VALUES (4, 2, '2021-01-13', 'Wednesday', 9);
+
 -- Each of these are done 3 times for each day of the week
 -- in order to create one available slot for each of the 3
 -- barbers for each day of the week
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 9, 10);
+VALUES ('Friday', 9, 10);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 10, 11);
+VALUES ('Friday', 10, 11);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 11, 12);
+VALUES ('Friday', 11, 12);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 12, 1);
+VALUES ('Friday', 12, 1);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 1, 2);
+VALUES ('Friday', 1, 2);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 2, 3);
+VALUES ('Friday', 2, 3);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 3, 4);
+VALUES ('Friday', 3, 4);
 
 INSERT INTO appointment_slots ("dotw", "start_time", "end_time")
-VALUES ('Monday', 4, 5);
+VALUES ('Friday', 4, 5);
