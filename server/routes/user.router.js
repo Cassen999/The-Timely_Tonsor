@@ -54,10 +54,10 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-router.put('/:id', (req,res) => {
+router.put('/id', (req,res) => {
   console.log('In router.put')
-  let id = req.params.id;
-  console.log('params', req.params)
+  const id = req.user.id;
+  console.log('params', req.body, id)
   const sqlText = `UPDATE "user" SET username=$1, first_name=$2,
     last_name=$3, phone_number=$4 WHERE id=${id} 
     RETURNING id`

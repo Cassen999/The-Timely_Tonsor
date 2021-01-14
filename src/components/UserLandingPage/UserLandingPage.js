@@ -83,7 +83,7 @@ class UserLandingPage extends Component {
 
   handleUserUpdate = (event) => {
     event.preventDefault();
-    console.log('in user update')
+    console.log('in user update', this.state)
     this.props.dispatch({
       type: 'UPDATE_USER',
       payload: this.state});
@@ -103,7 +103,7 @@ class UserLandingPage extends Component {
         <div>
           <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
           <p>From here, you can edit any profile information, or click the 
-            Schedule Appointment button to schedule and appointment</p>
+            Schedule Appointment button to schedule an appointment</p>
           <p>To edit your profile information, just type into the corresponding
             field and press Update to update that information
           </p>
