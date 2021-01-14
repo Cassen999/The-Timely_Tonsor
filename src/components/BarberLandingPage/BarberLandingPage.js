@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -23,22 +24,64 @@ const styles = theme => ({
     table: {
       minWidth: 700,
     },
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 200,
+      color: 'white'
+    },
   });
 
 class BarberLandingPage extends Component {
 
-
-  // componentDidMount -> GET appointments, map redux state 
+  state = {
+    date: '',
+    isBarber: false,
+  }
+    
+    // componentDidMount -> GET appointments, map redux state 
   componentDidMount() {
       this.props.dispatch({type: 'FETCH_APPOINTMENTS'})
   }
 
+  handleInputChangeFor = (event) => {
+    this.setState({
+      date: event.target.value,
+    });
+  };
+
+  handleSelectDate = (event) => {
+    event.preventDefault()
+    console.log('in SelectDate')
+  }
+    
   render() {
     const { classes } = this.props;
     return (
       <div>
         <h2>BarberLandingPage</h2>
-        {JSON.stringify(this.props.store.appointmentReducer)}
+        <h3>Select today's date</h3>
+        <form onSubmit={this.selectDate} className={classes.container} noValidate>
+          <div>
+          <TextField
+            id="date"
+            label="Today's Date"
+            type="date"
+            value={this.state.date}
+            onChange={this.handleInputChangeFor}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          </div>
+        </form>
+        {JSON.stringify(this.state)}
+        <h3>Today's date is {this.state.date} and it is a {this.props.store.appointments.dotw}</h3>
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
@@ -49,14 +92,14 @@ class BarberLandingPage extends Component {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {this.props.store.appointments.map((appointment) => {
+                    {/* {this.props.store.appointments.map((appointment) => {
                         if (appointment.name !== '') {
                             return <TableCell align="right">{this.props.store.appointments.user_id.name}</TableCell>
                         }
                         if (appointment.time !== '') {
                             return <TableCell align="right">{this.props.store.appointments.time}</TableCell>
                         }
-                    })}
+                    })} */}
                 </TableBody>
             </Table>
         </Paper>

@@ -6,9 +6,16 @@ const {
   } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    // Send back user object from the session (previously queried from the database)
-    console.log('req.body', req.body)
-    res.send(req.body);
-  });
+  const sqlText = `SELECT * FROM "user_appointment"`
+  pool.query(sqlText)
+  .then((result) => {
+    res.send(result.rows)
+    console.log(result.rows)
+  })
+  .catch((error) => {
+    console.log('ERROR making UA db GET query', error)
+    res.sendStatus(500)
+  })
+});
 
 module.exports = router;
