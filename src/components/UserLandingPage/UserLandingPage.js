@@ -83,7 +83,7 @@ class UserLandingPage extends Component {
 
   handleUserUpdate = (event) => {
     event.preventDefault();
-    console.log('in user update')
+    console.log('in user update', this.state)
     this.props.dispatch({
       type: 'UPDATE_USER',
       payload: this.state});
