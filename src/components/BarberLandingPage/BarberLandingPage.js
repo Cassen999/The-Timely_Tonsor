@@ -28,13 +28,17 @@ const styles = theme => ({
 class BarberLandingPage extends Component {
 
 
-  // componentDidMount -> GET appointments, map redux state
+  // componentDidMount -> GET appointments, map redux state 
+  componentDidMount() {
+      this.props.dispatch({type: 'FETCH_APPOINTMENTS'})
+  }
 
   render() {
     const { classes } = this.props;
     return (
       <div>
         <h2>BarberLandingPage</h2>
+        {JSON.stringify(this.props.store.appointmentReducer)}
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
