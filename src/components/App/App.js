@@ -12,6 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+// import ProtectedRouteBarber from '../ProtectedRoute/ProtectedRouteBarber';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserLandingPage from '../UserLandingPage/UserLandingPage';

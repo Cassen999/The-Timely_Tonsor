@@ -63,17 +63,6 @@ class UserLandingPage extends Component {
     last_name: this.props.store.user.last_name,
     phone_number: this.props.store.user.phone_number,
   };
-
-  // componentDidMount() {
-  //   if(this.props.store.user.first_name) {
-  //     this.setState({
-  //       username: this.props.store.user.username,
-  //       first_name: this.props.store.user.first_name,
-  //       last_name: this.props.store.user.last_name,
-  //       phone_number: this.props.store.user.phone_number,
-  //     })
-  //   }
-  // }
   
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
