@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import SchedulingOptions from '../SchedulingOptions/SchedulingOptions';
+import BarberLandingPage from '../BarberLandingPage/BarberLandingPage';
 
 import './App.css';
 
@@ -66,8 +67,15 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
-              path="/scheduling/1"
+              path="/scheduling/:id"
               component={SchedulingOptions}
+            />
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/barber/:id"
+              component={BarberLandingPage}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
