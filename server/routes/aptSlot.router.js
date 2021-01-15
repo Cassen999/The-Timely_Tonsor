@@ -5,17 +5,16 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // GETs all open appointments
     const sqlText = `SELECT * FROM "appointment_slots" AS "AS"
                     LEFT JOIN "user_appointment" AS UA
                     ON UA."appt_id" = "AS".id WHERE UA.appt_id 
-                    IS NULL AND "barber_id" = $1;`;
-    const id = req.params.id
-    const date = req.body.date
-    console.log('aptSlot router date=', req.body.date)
-    console.log(req.params.id)
-    pool.query(sqlText, [id])
+                    IS NULL AND "barber_id" = $1 AND "AS".dotw = $2;`;
+    const query = req.query
+    console.log('apsSlot router query id', query.id)
+    console.log('aptSlot router date', query.date)
+    pool.query(sqlText, [req.query.id, req.query.date])
     .then((result) => {
         console.log(`apptSlot router result.rows ${result.rows}`)
         res.send(result.rows)

@@ -83,7 +83,6 @@ class SchedulingOptions extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
     this.props.dispatch({type: 'FETCH_BARBERS'})
-    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: this.state.barber})
     console.log(this.props.store.allUsers)
     console.log(this.props.store.barbers)
   }
@@ -98,9 +97,16 @@ class SchedulingOptions extends Component {
   handleChangeForBarber = (event) => {
     this.setState({
       barber: event.target.value})
-    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: {barber_id: event.target.value, date: this.state.date}})
+    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: 
+      {barber_id: event.target.value, date: this.state.dotw}})
     console.log(this.state)
   }
+
+  handleChangeForTime = (event) => {
+    this.setState({
+      date: event.target.value,
+    });
+  };
 
   render() {
     const { classes } = this.props;
@@ -142,6 +148,27 @@ class SchedulingOptions extends Component {
                           value={this.state.barber}
                           // pass in event and input property for handleChange
                           onChange={(event) => this.handleChangeForBarber(event)}
+                          >
+                              {/* map genres to populate the dropdown */}
+                          {this.props.store.barbers.map((barber) => {
+                              return(
+                                  <MenuItem value={barber.id}>{barber.first_name}</MenuItem>
+                              )
+                          })}
+                      </Select>
+                    </FormControl>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} className={classes.gridItem}>
+              <Paper className={classes.paper}>
+                <div>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel>Available Times</InputLabel>
+                      <Select
+                          value={this.state.time}
+                          // pass in event and input property for handleChange
+                          onChange={(event) => this.handleChangeForTime(event)}
                           >
                               {/* map genres to populate the dropdown */}
                           {this.props.store.barbers.map((barber) => {
