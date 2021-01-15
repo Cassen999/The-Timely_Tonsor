@@ -56,7 +56,8 @@ const styles = (theme) => ({
   },
   buttonContainer: {
     float: 'right'
-  }
+  },
+  minutesStep: 0
 });
 
 class SchedulingOptions extends Component {
@@ -66,7 +67,9 @@ class SchedulingOptions extends Component {
 
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
+    this.props.dispatch({type: 'FETCH_APT_SLOTS'})
     console.log(this.props.store.allUsers)
+    console.log(this.props.store.aptSlots)
   }
 
   handleInputChangeFor = (event) => {
@@ -89,7 +92,7 @@ class SchedulingOptions extends Component {
               justify="center">
               <Grid item xs={6} className={classes.gridItem}>
                 <Paper className={classes.paper}>
-                  <div className={classes.datePicker}>
+                  {/* <div className={classes.datePicker}> */}
                     <TextField
                       id="date"
                       label="Today's Date"
@@ -102,9 +105,26 @@ class SchedulingOptions extends Component {
                       }}
                     />
                     {JSON.stringify(this.state)}
-                  </div>
+                  {/* </div> */}
                 </Paper>
               </Grid>
+            </Grid>
+            <Grid item xs={6} className={classes.gridItem}>
+              <Paper className={classes.paper}>
+                <TextField
+                  id="time"
+                  label="Alarm clock"
+                  type="time"
+                  defaultValue="09:00"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                />
+              </Paper>
             </Grid>
           </div>
         </form>

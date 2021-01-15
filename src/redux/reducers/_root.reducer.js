@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import appointments from './appointment.reducer';
 import allUsers from './allUsers.reducer';
+import aptSlots from './aptSlot.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   appointments,
-  allUsers
+  allUsers,
+  aptSlots
 });
 
 export default rootReducer;
