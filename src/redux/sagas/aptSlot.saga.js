@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* fetchApptSlots() {
+function* fetchApptSlots(action) {
+    console.log('aptSlot saga', action.payload)
+    const id = action.payload.barber_id
     try {
-        const response = yield axios.get('/api/slots')
+        const response = yield axios.get(`/api/slots/${id}`)
         yield put({type: 'SET_APT_SLOTS', payload: response.data})
         console.log('apptSlot saga response.data',response.data)
     }

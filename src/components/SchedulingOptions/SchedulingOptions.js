@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import moment from 'moment';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -75,31 +76,30 @@ class SchedulingOptions extends Component {
   state = {
     date: '',
     time: '',
-    barber: ''
+    barber: '',
+    dotw: ''
   };
 
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
-    this.props.dispatch({type: 'FETCH_APT_SLOTS'})
     this.props.dispatch({type: 'FETCH_BARBERS'})
+    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: this.state.barber})
     console.log(this.props.store.allUsers)
-    console.log(this.props.store.aptSlots)
     console.log(this.props.store.barbers)
   }
 
   handleInputChangeFor = (event) => {
     this.setState({
       date: event.target.value,
+      dotw: moment(event.target.value).format('dddd'),
     });
-    const options = {weekday: 'long'};
-    let day = new Intl.DateTimeFormat('en-US', options).format(this.state.date);
-
   };
-
+  
   handleChangeForBarber = (event) => {
     this.setState({
-      barber: event.target.value
-    })
+      barber: event.target.value})
+    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: {barber_id: event.target.value, date: this.state.date}})
+    console.log(this.state)
   }
 
   render() {
@@ -146,7 +146,7 @@ class SchedulingOptions extends Component {
                               {/* map genres to populate the dropdown */}
                           {this.props.store.barbers.map((barber) => {
                               return(
-                                  <MenuItem value={barber.first_name}>{barber.first_name}</MenuItem>
+                                  <MenuItem value={barber.id}>{barber.first_name}</MenuItem>
                               )
                           })}
                       </Select>
