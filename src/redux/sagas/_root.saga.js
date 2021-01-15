@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import appointmentSaga from './appointment.saga';
 import allUsersSaga from './allUsers.saga';
 import aptSlotSaga from './aptSlot.saga';
+import barberSaga from './barber.saga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     userSaga(),
     appointmentSaga(),
     allUsersSaga(),
-    aptSlotSaga()
+    aptSlotSaga(),
+    barberSaga()
   ]);
 }

@@ -7,6 +7,10 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -57,26 +61,46 @@ const styles = (theme) => ({
   buttonContainer: {
     float: 'right'
   },
-  minutesStep: 0
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+    maxWidth: 300,
+  },
+  selectEmpty: {
+      marginTop: theme.spacing.unit * 2,
+  },
 });
 
 class SchedulingOptions extends Component {
   state = {
     date: '',
+    time: '',
+    barber: ''
   };
 
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
     this.props.dispatch({type: 'FETCH_APT_SLOTS'})
+    this.props.dispatch({type: 'FETCH_BARBERS'})
     console.log(this.props.store.allUsers)
     console.log(this.props.store.aptSlots)
+    console.log(this.props.store.barbers)
   }
 
   handleInputChangeFor = (event) => {
     this.setState({
       date: event.target.value,
     });
+    const options = {weekday: 'long'};
+    let day = new Intl.DateTimeFormat('en-US', options).format(this.state.date);
+
   };
+
+  handleChangeForBarber = (event) => {
+    this.setState({
+      barber: event.target.value
+    })
+  }
 
   render() {
     const { classes } = this.props;
@@ -95,7 +119,7 @@ class SchedulingOptions extends Component {
                   {/* <div className={classes.datePicker}> */}
                     <TextField
                       id="date"
-                      label="Today's Date"
+                      label="Select a Date"
                       type="date"
                       value={this.state.date}
                       onChange={this.handleInputChangeFor}
@@ -111,19 +135,23 @@ class SchedulingOptions extends Component {
             </Grid>
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
-                <TextField
-                  id="time"
-                  label="Alarm clock"
-                  type="time"
-                  defaultValue="09:00"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    step: 300, // 5 min
-                  }}
-                />
+                <div>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel>Barbers</InputLabel>
+                      <Select
+                          value={this.state.barber}
+                          // pass in event and input property for handleChange
+                          onChange={(event) => this.handleChangeForBarber(event)}
+                          >
+                              {/* map genres to populate the dropdown */}
+                          {this.props.store.barbers.map((barber) => {
+                              return(
+                                  <MenuItem value={barber.first_name}>{barber.first_name}</MenuItem>
+                              )
+                          })}
+                      </Select>
+                    </FormControl>
+                </div>
               </Paper>
             </Grid>
           </div>

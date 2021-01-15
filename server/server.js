@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const appointmentRouter = require('./routes/appointment.router');
 const allUsersRouter = require('./routes/allUsers.router');
 const aptSlotRouter = require('./routes/aptSlot.router');
+const barberRouter = require('./routes/barber.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,7 +30,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/appointments', appointmentRouter)
 app.use('/api/users', allUsersRouter),
-app.use('/api/slots', aptSlotRouter)
+app.use('/api/slots', aptSlotRouter),
+app.use('/api/barbers', barberRouter),
 
 // Serve static files
 app.use(express.static('build'));
