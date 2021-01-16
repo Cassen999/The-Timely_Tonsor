@@ -75,12 +75,6 @@ class TimePicker extends Component {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
   }
 
-  handleChangeForTime = (event) => {
-    this.setState({
-      time: event.target.value,
-    });
-  };
-
   render() {
     const { classes } = this.props;
     return (

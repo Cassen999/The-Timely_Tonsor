@@ -101,10 +101,11 @@ class SchedulingOptions extends Component {
   }
 
   setTime = (event) => {
+    event.preventDefault()
     this.setState({
-      // apt_id: this.props.store.slots.id,
-      time: event.target.value
+      time: event.target.value,
     })
+    console.log('setTime event.target', event.target)
   }
 
   handleConfirmationRoute = (event, id) => {
@@ -129,7 +130,7 @@ class SchedulingOptions extends Component {
     return (
     <div>
       <h2>Please schedule your appointment below</h2>
-        {JSON.stringify(this.props.store.user)}
+        {/* {JSON.stringify(this.props.store.user)} */}
         {JSON.stringify(this.state)}
         {JSON.stringify(this.props.store.aptSlots)}
       <h3>Choose Your Appointment Details</h3>
