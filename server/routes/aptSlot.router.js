@@ -10,7 +10,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM "appointment_slots" AS "AS"
                     LEFT JOIN "user_appointment" AS UA
                     ON UA."appt_id" = "AS".id WHERE UA.appt_id 
-                    IS NULL AND "barber_id" = $1 AND "AS".dotw = $2;`;
+                    IS NULL AND "barber_id" = $1 AND "AS".dotw = $2
+                    ORDER BY start_time;`;
     const query = req.query
     console.log('apsSlot router query id', query.id)
     console.log('aptSlot router date', query.date)

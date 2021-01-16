@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import moment from 'moment';
+import RenderBarberDropdown from '../RenderBarberDropdown/RenderBarberDropdown';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -38,10 +39,11 @@ const styles = (theme) => ({
     flexBasis: 0,
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 1,
     textAlign: 'center',
     color: theme.palette.text.secondary,
     width: 300,
+    height:55
   },
   container: {
     display: 'flex',
@@ -51,7 +53,8 @@ const styles = (theme) => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
-    color: 'white'
+    color: 'white',
+    justifyContent: 'center'
   },
   dense: {
     marginTop: 19,
@@ -63,8 +66,8 @@ const styles = (theme) => ({
     float: 'right'
   },
   formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
+    // margin: theme.spacing.unit,
+    minWidth: 190,
     maxWidth: 300,
   },
   selectEmpty: {
@@ -104,7 +107,7 @@ class SchedulingOptions extends Component {
 
   handleChangeForTime = (event) => {
     this.setState({
-      date: event.target.value,
+      time: event.target.value,
     });
   };
 
@@ -114,45 +117,45 @@ class SchedulingOptions extends Component {
     <div>
       <h2>Please schedule your appointment below</h2>
         {JSON.stringify(this.props.store.user)}
-      <h3>Choose preferred date</h3>
+      <h3>Choose Your Appointment Details</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.root}>
-            <Grid container spacing={6}
+            
+            {/* Date Picker */}
+            <Grid container spacing={2}
               alignItems="center"
               justify="center">
               <Grid item xs={6} className={classes.gridItem}>
                 <Paper className={classes.paper}>
-                  {/* <div className={classes.datePicker}> */}
-                    <TextField
-                      id="date"
-                      label="Select a Date"
-                      type="date"
-                      value={this.state.date}
-                      onChange={this.handleInputChangeFor}
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                    {JSON.stringify(this.state)}
-                  {/* </div> */}
+                  <TextField
+                    id="date"
+                    label="Select a Date"
+                    type="date"
+                    value={this.state.date}
+                    onChange={this.handleInputChangeFor}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
                 </Paper>
               </Grid>
-            </Grid>
+            
+            {/* Barber Picker */}
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <div>
                   <FormControl className={classes.formControl}>
-                    <InputLabel>Barbers</InputLabel>
+                    <InputLabel>Available Barbers</InputLabel>
                       <Select
                           value={this.state.barber}
                           // pass in event and input property for handleChange
                           onChange={(event) => this.handleChangeForBarber(event)}
                           >
                               {/* map genres to populate the dropdown */}
-                          {this.props.store.barbers.map((barber) => {
+                          {this.props.store.barbers.map((barber, i) => {
                               return(
-                                  <MenuItem value={barber.id}>{barber.first_name}</MenuItem>
+                                  <MenuItem key={i} value={barber.id}>{barber.first_name}</MenuItem>
                               )
                           })}
                       </Select>
@@ -160,6 +163,8 @@ class SchedulingOptions extends Component {
                 </div>
               </Paper>
             </Grid>
+
+            {/* Time Picker */}
             <Grid item xs={6} className={classes.gridItem}>
               <Paper className={classes.paper}>
                 <div>
@@ -170,19 +175,23 @@ class SchedulingOptions extends Component {
                           // pass in event and input property for handleChange
                           onChange={(event) => this.handleChangeForTime(event)}
                           >
+                            {JSON.stringify(this.props.store.aptSlots)}
                               {/* map genres to populate the dropdown */}
-                          {this.props.store.barbers.map((barber) => {
+                          {this.props.store.aptSlots.map((slot) => {
                               return(
-                                  <MenuItem value={barber.id}>{barber.first_name}</MenuItem>
+                                  <MenuItem value={slot.start_time}>{slot.start_time}</MenuItem>
                               )
                           })}
                       </Select>
                     </FormControl>
-                </div>
-              </Paper>
+                 </div>
+                </Paper>
+              </Grid>
             </Grid>
           </div>
         </form>
+        <h3>Your appointment is on: {this.state.dotw} {this.state.date} 
+            at {this.state.time} with {this.state.barber}</h3>
       </div>
     );
   }
