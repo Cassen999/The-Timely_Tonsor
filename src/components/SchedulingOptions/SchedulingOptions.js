@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import moment from 'moment';
 import BarberPicker from '../BarberPicker/BarberPicker';
+import AptConfirmation from '../AptConfirmation/AptConfirmation';
 
 const styles = (theme) => ({
   root: {
@@ -71,7 +72,9 @@ const styles = (theme) => ({
 class SchedulingOptions extends Component {
   state = {
     date: '',
-    dotw: ''
+    dotw: '',
+    barber: '',
+    time: ''
   };
 
   componentDidMount() {
@@ -79,6 +82,23 @@ class SchedulingOptions extends Component {
     this.props.dispatch({type: 'FETCH_BARBERS'})
     console.log(this.props.store.allUsers)
     console.log(this.props.store.barbers)
+  }
+
+  setBarber = (event) => {
+    console.log('SchedulingOptions event: ', event)
+    this.setState({
+      barber: event.target.value
+    })
+    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: 
+        {barber_id: event.target.value, date: this.state.dotw}})
+    console.log('scheduling options state.barber ', this.state.barber)
+  }
+
+  setTime = (event) => {
+    console.log('In SchedulingOptions setTime');
+    this.setState({
+      time: event.target.value
+    })
   }
 
   handleInputChangeFor = (event) => {
@@ -89,11 +109,11 @@ class SchedulingOptions extends Component {
   };
 
   handleConfirmationRoute = (event, id) => {
-    event.preventDefault()
     if (this.state.date !== '' && this.state.time !== ''
         && this.state.barber !== '' && this.state.dotw !== '') {
           console.log('In handleConfirmationRoute, id: ', id)
           this.props.history.push(`/confirm/${id}`)
+          this.props.dispatch({type: 'ADD_APPOINTMENT', payload: this.state})
         }
         else {
           alert('Please fill out all fields to proceed to appointment confirmation')
@@ -110,6 +130,7 @@ class SchedulingOptions extends Component {
     <div>
       <h2>Please schedule your appointment below</h2>
         {JSON.stringify(this.props.store.user)}
+        {JSON.stringify(this.state)}
       <h3>Choose Your Appointment Details</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.root}>
@@ -137,7 +158,8 @@ class SchedulingOptions extends Component {
           </div>
         </form>
         {this.state.date !== '' ? <BarberPicker date={this.state.date} 
-        dotw={this.state.dotw} /> : <p>Please choose a date</p>}
+        dotw={this.state.dotw} state={this.state} 
+        setBarber={this.setBarber} setTime={this.setTime}/> : <p>Please choose a date</p>}
         <div>
           <Button 
             onClick={(event) => this.handleBack(event)}

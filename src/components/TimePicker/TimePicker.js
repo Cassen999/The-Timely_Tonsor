@@ -93,15 +93,15 @@ class TimePicker extends Component {
                     <FormControl className={classes.formControl}>
                     <InputLabel>Available Times</InputLabel>
                         <Select
-                            value={this.state.time}
+                            value={this.props.state.time}
                             // pass in event and input property for handleChange
-                            onChange={(event) => this.handleChangeForTime(event)}
+                            onChange={(event) => this.props.setTime(event)}
                             >
                             {JSON.stringify(this.props.store.aptSlots)}
                                 {/* map genres to populate the dropdown */}
-                            {this.props.store.aptSlots.map((slot) => {
+                            {this.props.store.aptSlots.map((slot, i) => {
                                 return(
-                                    <MenuItem value={slot.start_time}>{slot.start_time}</MenuItem>
+                                    <MenuItem key={i} value={slot.start_time}>{slot.start_time}</MenuItem>
                                 )
                             })}
                         </Select>

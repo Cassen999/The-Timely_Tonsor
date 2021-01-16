@@ -8,17 +8,34 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // component.
 class AptConfirmation extends Component {
   state = {
-    heading: 'Class Component',
+    heading: this.props.date,
   };
+
+  componentDidMount() {
+    console.log('aptConfirm payload', this.props.store.appointments)
+    this.props.dispatch({type: 'FETCH_APPOINTMENTS', payload: this.props.store.appointments.barber})
+  }
+
+  handleSubmit = (event) => {
+  }
 
   render() {
     return (
       <div className="renderAptInfo">
+        {<h1>{this.state.heading}</h1>}
         <h2>Your Appointment Details</h2>
         <p>Please review the details below, if they look correct,
             click the "Confirm Appointment" button. If not, click the
             back button to start the create appointment process over.
         </p>
+        {/* <Button 
+            onClick={(event) => this.handleSubmit(event, this.props.store.user.id)}
+            color="primary"
+            variant="contained" 
+            size="large" 
+            className={classes.button}>
+            Continue
+          </Button> */}
       </div>
     );
   }
