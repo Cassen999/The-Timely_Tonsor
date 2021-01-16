@@ -6,18 +6,12 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import SaveIcon from '@material-ui/icons/Save';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import moment from 'moment';
-import RenderBarberDropdown from '../RenderBarberDropdown/RenderBarberDropdown';
-
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name TemplateClass with the name for the new
-// component.
+import BarberPicker from '../BarberPicker/BarberPicker';
 
 const styles = (theme) => ({
   root: {
@@ -66,7 +60,6 @@ const styles = (theme) => ({
     float: 'right'
   },
   formControl: {
-    // margin: theme.spacing.unit,
     minWidth: 190,
     maxWidth: 300,
   },
@@ -78,8 +71,6 @@ const styles = (theme) => ({
 class SchedulingOptions extends Component {
   state = {
     date: '',
-    time: '',
-    barber: '',
     dotw: ''
   };
 
@@ -96,20 +87,22 @@ class SchedulingOptions extends Component {
       dotw: moment(event.target.value).format('dddd'),
     });
   };
-  
-  handleChangeForBarber = (event) => {
-    this.setState({
-      barber: event.target.value})
-    this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: 
-      {barber_id: event.target.value, date: this.state.dotw}})
-    console.log(this.state)
+
+  handleConfirmationRoute = (event, id) => {
+    event.preventDefault()
+    if (this.state.date !== '' && this.state.time !== ''
+        && this.state.barber !== '' && this.state.dotw !== '') {
+          console.log('In handleConfirmationRoute, id: ', id)
+          this.props.history.push(`/confirm/${id}`)
+        }
+        else {
+          alert('Please fill out all fields to proceed to appointment confirmation')
+        }
   }
 
-  handleChangeForTime = (event) => {
-    this.setState({
-      time: event.target.value,
-    });
-  };
+  handleBack = (event) => {
+    this.props.history.push('/user')
+  }
 
   render() {
     const { classes } = this.props;
@@ -140,61 +133,34 @@ class SchedulingOptions extends Component {
                   />
                 </Paper>
               </Grid>
-            
-            {/* Barber Picker */}
-            <Grid item xs={6} className={classes.gridItem}>
-              <Paper className={classes.paper}>
-                <div>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel>Available Barbers</InputLabel>
-                      <Select
-                          value={this.state.barber}
-                          // pass in event and input property for handleChange
-                          onChange={(event) => this.handleChangeForBarber(event)}
-                          >
-                              {/* map genres to populate the dropdown */}
-                          {this.props.store.barbers.map((barber, i) => {
-                              return(
-                                  <MenuItem key={i} value={barber.id}>{barber.first_name}</MenuItem>
-                              )
-                          })}
-                      </Select>
-                    </FormControl>
-                </div>
-              </Paper>
-            </Grid>
-
-            {/* Time Picker */}
-            <Grid item xs={6} className={classes.gridItem}>
-              <Paper className={classes.paper}>
-                <div>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel>Available Times</InputLabel>
-                      <Select
-                          value={this.state.time}
-                          // pass in event and input property for handleChange
-                          onChange={(event) => this.handleChangeForTime(event)}
-                          >
-                            {JSON.stringify(this.props.store.aptSlots)}
-                              {/* map genres to populate the dropdown */}
-                          {this.props.store.aptSlots.map((slot) => {
-                              return(
-                                  <MenuItem value={slot.start_time}>{slot.start_time}</MenuItem>
-                              )
-                          })}
-                      </Select>
-                    </FormControl>
-                 </div>
-                </Paper>
-              </Grid>
             </Grid>
           </div>
         </form>
-        <h3>Your appointment is on: {this.state.dotw} {this.state.date} 
-            at {this.state.time} with {this.state.barber}</h3>
+        {this.state.date !== '' ? <BarberPicker date={this.state.date} 
+        dotw={this.state.dotw} /> : <p>Please choose a date</p>}
+        <div>
+          <Button 
+            onClick={(event) => this.handleBack(event)}
+            color="primary"
+            variant="contained" 
+            size="large" 
+            className={classes.button}>
+            Back
+          </Button>
+        </div>
+        <div>
+          <Button 
+            onClick={(event) => this.handleConfirmationRoute(event, this.props.store.user.id)}
+            color="primary"
+            variant="contained" 
+            size="large" 
+            className={classes.button}>
+            Continue
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(connect(mapStoreToProps)(SchedulingOptions));;
+export default withStyles(styles)(connect(mapStoreToProps)(SchedulingOptions));

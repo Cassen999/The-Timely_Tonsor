@@ -22,6 +22,9 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import SchedulingOptions from '../SchedulingOptions/SchedulingOptions';
 import BarberLandingPage from '../BarberLandingPage/BarberLandingPage';
+import AptConfirmation from '../AptConfirmation/AptConfirmation';
+import BarberPicker from '../BarberPicker/BarberPicker';
+import TimePicker from '../TimePicker/TimePicker';
 
 import './App.css';
 
@@ -75,8 +78,29 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
+              path="/timePicker"
+              component={TimePicker}
+            />
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/barberPicker"
+              component={BarberPicker}
+            />
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
               path="/barber/:id"
               component={BarberLandingPage}
+            />
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/confirm/:id"
+              component={AptConfirmation}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
