@@ -70,6 +70,8 @@ const styles = (theme) => ({
 
 class SchedulingOptions extends Component {
   state = {
+    user_id: `${this.props.store.user.id}`,
+    apt_id: '',
     date: '',
     dotw: '',
     barber: '',
@@ -100,6 +102,7 @@ class SchedulingOptions extends Component {
 
   setTime = (event) => {
     this.setState({
+      // apt_id: this.props.store.slots.id,
       time: event.target.value
     })
   }
@@ -128,6 +131,7 @@ class SchedulingOptions extends Component {
       <h2>Please schedule your appointment below</h2>
         {JSON.stringify(this.props.store.user)}
         {JSON.stringify(this.state)}
+        {JSON.stringify(this.props.store.aptSlots)}
       <h3>Choose Your Appointment Details</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.root}>

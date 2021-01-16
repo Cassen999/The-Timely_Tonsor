@@ -25,8 +25,10 @@ const {
 router.post('/', rejectUnauthenticated, (req, res) => {
   const user_id = req.body.user_id;
   const date = req.body.date;
-  const apt_id = req.body.apt_id;
-  console.log(req.body)
+  const dotw = req.body.dotw;
+  const barber = req.body.barber;
+  const time = req.body.time;
+  console.log('addAppointment req.body:', req.body)
   const sqlText = `INSERT INTO "user_appointment" ("user_id", "date", "apt_id")
                     VALUES ($1, $2, $3);`
   // pool.query(sqlText, [user_id, date, apt_id])
