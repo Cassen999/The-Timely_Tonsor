@@ -74,13 +74,13 @@ class BarberPicker extends Component {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
   }
 
-  handleChangeForBarber = (event) => {
-      this.setState({
-        barber: event.target.value})
-      this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: 
-        {barber_id: event.target.value, date: this.props.dotw}})
-      console.log(this.state)
-    }
+  // handleChangeForBarber = (event) => {
+  //     this.setState({
+  //       barber: event.target.value})
+  //     this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: 
+  //       {barber_id: event.target.value, date: this.props.state.dotw}})
+  //     console.log('', this.props.state)
+  //   }
 
   render() {
     const { classes } = this.props;
@@ -92,9 +92,9 @@ class BarberPicker extends Component {
                 <FormControl className={classes.formControl}>
                 <InputLabel>Available Barbers</InputLabel>
                     <Select
-                        value={this.state.barber}
+                        value={this.props.state.barber}
                         // pass in event and input property for handleChange
-                        onChange={(event) => this.handleChangeForBarber(event)}
+                        onChange={(event) => this.props.setBarber(event)}
                         >
                             {/* map barbers to populate the dropdown */}
                         {this.props.store.barbers.map((barber, i) => {
@@ -106,7 +106,8 @@ class BarberPicker extends Component {
                 </FormControl>
             </div>
         </Paper>
-        {this.state.barber !== '' ? <TimePicker /> : <p>Please choose a Barber</p>}
+        {this.props.state.barber !== '' ? <TimePicker state={this.props.state} 
+        setTime={this.props.setTime} /> : <p>Please choose a Barber</p>}
       </div>
     );
   }
