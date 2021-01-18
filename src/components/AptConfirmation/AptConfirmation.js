@@ -11,6 +11,10 @@ class AptConfirmation extends Component {
     heading: 'Class Component',
   };
 
+  goBack = (event) => {
+    this.props.history.push('/user')
+  }
+
   render() {
     return (
       <div className="renderAptInfo">
@@ -19,6 +23,8 @@ class AptConfirmation extends Component {
             click the "Confirm Appointment" button. If not, click the
             back button to start the create appointment process over.
         </p>
+        {JSON.stringify(this.props.store.addApt)}
+        <button onClick={(event) => this.goBack(event)}>back</button>
       </div>
     );
   }

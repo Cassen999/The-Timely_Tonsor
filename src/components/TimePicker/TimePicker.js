@@ -68,6 +68,7 @@ const styles = (theme) => ({
 
 class TimePicker extends Component {
   state = {
+    apt_id: '',
     time: ''
   };
 
@@ -87,7 +88,7 @@ class TimePicker extends Component {
                     <FormControl className={classes.formControl}>
                     <InputLabel>Available Times</InputLabel>
                         <Select
-                            value={this.props.state.time}
+                            value={this.props.state.apt_id}
                             // pass in event and input property for handleChange
                             onChange={(event) => this.props.setTime(event)}
                             >
@@ -95,7 +96,7 @@ class TimePicker extends Component {
                                 {JSON.stringify(this.props.store.aptSlots)}
                             {this.props.store.aptSlots.map((slot) => {
                               return(
-                                <MenuItem value={slot.start_time}>{slot.start_time}</MenuItem>
+                                <MenuItem value={slot.id}>{slot.start_time}</MenuItem>
                                 )
                             })}
                         </Select>

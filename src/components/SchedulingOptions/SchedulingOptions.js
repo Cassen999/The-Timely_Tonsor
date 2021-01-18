@@ -70,7 +70,7 @@ const styles = (theme) => ({
 
 class SchedulingOptions extends Component {
   state = {
-    user_id: `${this.props.store.user.id}`,
+    user_id: Number(this.props.store.user.id),
     apt_id: '',
     date: '',
     dotw: '',
@@ -86,6 +86,7 @@ class SchedulingOptions extends Component {
   }
 
   handleInputChangeFor = (event) => {
+    event.preventDefault();
     this.setState({
       date: event.target.value,
       dotw: moment(event.target.value).format('dddd'),
@@ -93,6 +94,7 @@ class SchedulingOptions extends Component {
   };
 
   setBarber = (event) => {
+    event.preventDefault();
     this.setState({
       barber: event.target.value
     })
@@ -103,17 +105,19 @@ class SchedulingOptions extends Component {
   setTime = (event) => {
     event.preventDefault()
     this.setState({
-      time: event.target.value,
+      apt_id: event.target.value,
     })
     console.log('setTime event.target', event.target)
   }
 
   handleConfirmationRoute = (event, id) => {
     event.preventDefault()
-    if (this.state.date !== '' && this.state.time !== ''
+    if (this.state.date !== '' && this.state.apt_id !== ''
         && this.state.barber !== '' && this.state.dotw !== '') {
           console.log('In handleConfirmationRoute, id: ', id)
-          this.props.dispatch({type: 'ADD_APPOINTMENT', payload: this.state})
+          this.props.dispatch({type: 'ADD_APPOINTMENT', 
+          payload: this.state})
+          console.log('handleConfirmationRoute state at dispatch', this.state)
           this.props.history.push(`/confirm/${id}`)
         }
         else {
@@ -131,8 +135,9 @@ class SchedulingOptions extends Component {
     <div>
       <h2>Please schedule your appointment below</h2>
         {/* {JSON.stringify(this.props.store.user)} */}
-        {JSON.stringify(this.state)}
-        {JSON.stringify(this.props.store.aptSlots)}
+        {/* {JSON.stringify(this.state)}
+        {JSON.stringify(this.props.store.aptSlots)} */}
+        {JSON.stringify(this.props.store.addApt)}
       <h3>Choose Your Appointment Details</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.root}>
