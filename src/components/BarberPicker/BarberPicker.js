@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -73,14 +72,6 @@ class BarberPicker extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_ALL_USERS'})
   }
-
-  // handleChangeForBarber = (event) => {
-  //     this.setState({
-  //       barber: event.target.value})
-  //     this.props.dispatch({type: 'FETCH_APT_SLOTS', payload: 
-  //       {barber_id: event.target.value, date: this.props.state.dotw}})
-  //     console.log('', this.props.state)
-  //   }
 
   render() {
     const { classes } = this.props;

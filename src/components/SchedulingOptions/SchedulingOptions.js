@@ -6,12 +6,9 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import moment from 'moment';
 import BarberPicker from '../BarberPicker/BarberPicker';
+import AptConfirmation from '../AptConfirmation/AptConfirmation';
 
 const styles = (theme) => ({
   root: {
@@ -119,6 +116,14 @@ class SchedulingOptions extends Component {
           payload: this.state})
           console.log('handleConfirmationRoute state at dispatch', this.state)
           this.props.history.push(`/confirm/${id}`)
+          this.setState({
+            user_id: Number(this.props.store.user.id),
+            apt_id: '',
+            date: '',
+            dotw: '',
+            barber: '',
+            time: ''
+          })
         }
         else {
           alert('Please fill out all fields to proceed to appointment confirmation')
