@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import BarberPicker from '../BarberPicker/BarberPicker';
 import AptConfirmation from '../AptConfirmation/AptConfirmation';
+import DisableSelectBtn from '../DisableSelectBtn/DisableSelectBtn';
 
 const styles = (theme) => ({
   root: {
@@ -128,6 +129,11 @@ class SchedulingOptions extends Component {
         }
   }
 
+  disableButton = (btn) => {
+    document.getElementById(btn.selectBtn).disabled = true;
+    alert('Appointment already submitted')
+  }
+
   chooseApt = () => {
     if (this.state.date !== '' && this.state.apt_id !== ''
         && this.state.barber !== '' && this.state.dotw !== '') {
@@ -135,6 +141,9 @@ class SchedulingOptions extends Component {
                 payload: this.state})
           this.setState({clicked: true})
         }
+    if (this.state.clicked === true) {
+      this.disableButton()
+    }
   }
 
   handleBack = (event) => {
@@ -175,18 +184,21 @@ class SchedulingOptions extends Component {
         {this.state.date !== '' ? <BarberPicker state={this.state} 
          setBarber={this.setBarber} setTime={this.setTime}/> : <p>Please choose a date</p>}
   
-        {this.state.apt_id && 
+        {this.state.apt_id !== '' ? 
           <div>
             <p>Click this button to book your appointment then press Continue</p>
             <Button 
+              name="selectAppointment"
+              id="selectBtn"
               onClick={(event) => this.chooseApt(event)}
               color="primary"
               variant="contained" 
               size="large" 
               className={classes.button}>
-              Select Appointment
+              {this.state.clicked === false ? 'Select Appointment' : 'Appointment Set!'}
             </Button>
-          </div>}
+          </div> : 
+          <DisableSelectBtn />}
         <div>
           <Button 
             onClick={(event) => this.handleBack(event)}
