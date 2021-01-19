@@ -72,7 +72,8 @@ class SchedulingOptions extends Component {
     date: '',
     dotw: '',
     barber: '',
-    time: ''
+    time: '',
+    clicked: false
   };
 
   componentDidMount() {
@@ -127,11 +128,12 @@ class SchedulingOptions extends Component {
         }
   }
 
-  chooseApt = (event) => {
+  chooseApt = () => {
     if (this.state.date !== '' && this.state.apt_id !== ''
         && this.state.barber !== '' && this.state.dotw !== '') {
           this.props.dispatch({type: 'ADD_APPOINTMENT', 
                 payload: this.state})
+          this.setState({clicked: true})
         }
   }
 
@@ -172,6 +174,19 @@ class SchedulingOptions extends Component {
         </form>
         {this.state.date !== '' ? <BarberPicker state={this.state} 
          setBarber={this.setBarber} setTime={this.setTime}/> : <p>Please choose a date</p>}
+  
+        {this.state.apt_id && 
+          <div>
+            <p>Click this button to book your appointment then press Continue</p>
+            <Button 
+              onClick={(event) => this.chooseApt(event)}
+              color="primary"
+              variant="contained" 
+              size="large" 
+              className={classes.button}>
+              Select Appointment
+            </Button>
+          </div>}
         <div>
           <Button 
             onClick={(event) => this.handleBack(event)}
@@ -180,16 +195,6 @@ class SchedulingOptions extends Component {
             size="large" 
             className={classes.button}>
             Back
-          </Button>
-        </div>
-        <div>
-          <Button 
-            onClick={(event) => this.chooseApt(event)}
-            color="primary"
-            variant="contained" 
-            size="large" 
-            className={classes.button}>
-            Select Appointment
           </Button>
         </div>
         <div>

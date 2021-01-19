@@ -93,7 +93,6 @@ class TimePicker extends Component {
                             onChange={(event) => this.props.setTime(event)}
                             >
                                 {/* map genres to populate the dropdown */}
-                                {JSON.stringify(this.props.store.aptSlots)}
                             {this.props.store.aptSlots.map((slot) => {
                               return(
                                 <MenuItem value={slot.id}>{slot.start_time}</MenuItem>
