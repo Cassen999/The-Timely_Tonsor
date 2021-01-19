@@ -4,15 +4,17 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class AptConfirmation extends Component {
   state = {
-    id: this.props.store.addApt.id,
-    date: this.props.store.addApt.date,
-    time: this.props.store.addApt.time,
+    time: '',
     barber: ''
   };
 
-  // componentDidMount() {
-  //   console.log(this.state)
-  // }
+  componentDidMount() {
+    this.props.dispatch({type: 'FETCH_CONF_TIME', 
+    payload: this.props.store.addApt.id})
+    this.setState({
+      time: this.props.store.confTime.start_time
+    })
+  }
 
   goBack = (event) => {
     this.props.history.push('/user')
@@ -20,7 +22,8 @@ class AptConfirmation extends Component {
   }
   
   render() {
-      console.log(this.state)
+      console.log('apt conf time redux state', this.props.store.confTime)
+      console.log('apt conf state: ', this.state.time)
     return (
       <div className="renderAptInfo">
         <h2>Your Appointment Details</h2>
@@ -28,12 +31,13 @@ class AptConfirmation extends Component {
             click the "Confirm Appointment" button. If not, click the
             back button to start the create appointment process over.
         </p>
-        {JSON.stringify(this.props.store.addApt)}
+        {JSON.stringify(this.state.time)}
         <h3>Date</h3>
-        <p>{this.props.store.addApt.id}</p>
+        <p>{this.props.store.addApt.date}</p>
         <h3>Time</h3>
-        <p>sdfg</p>
+        <p>{this.props.store.confTime[0]?.start_time}</p>
         <button onClick={(event) => this.goBack(event)}>back</button>
+        <button onClick={(event) => this.props.dispatch({type: 'FETCH_CONF_TIME', payload: this.props.store.addApt.id})}>test</button>
       </div>
     );
   }

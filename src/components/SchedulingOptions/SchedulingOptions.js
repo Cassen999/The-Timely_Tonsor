@@ -112,9 +112,6 @@ class SchedulingOptions extends Component {
     if (this.state.date !== '' && this.state.apt_id !== ''
         && this.state.barber !== '' && this.state.dotw !== '') {
           console.log('In handleConfirmationRoute, id: ', id)
-          this.props.dispatch({type: 'ADD_APPOINTMENT', 
-          payload: this.state})
-          console.log('handleConfirmationRoute state at dispatch', this.state)
           this.props.history.push(`/confirm/${id}`)
           this.setState({
             user_id: Number(this.props.store.user.id),
@@ -128,6 +125,11 @@ class SchedulingOptions extends Component {
         else {
           alert('Please fill out all fields to proceed to appointment confirmation')
         }
+  }
+
+  chooseApt = (event) => {
+    this.props.dispatch({type: 'ADD_APPOINTMENT', 
+          payload: this.state})
   }
 
   handleBack = (event) => {
@@ -179,6 +181,16 @@ class SchedulingOptions extends Component {
             size="large" 
             className={classes.button}>
             Back
+          </Button>
+        </div>
+        <div>
+          <Button 
+            onClick={(event) => this.chooseApt(event)}
+            color="primary"
+            variant="contained" 
+            size="large" 
+            className={classes.button}>
+            Select Appointment
           </Button>
         </div>
         <div>

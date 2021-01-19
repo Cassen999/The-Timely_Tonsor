@@ -17,7 +17,7 @@ const aptSlotRouter = require('./routes/aptSlot.router');
 const barberRouter = require('./routes/barber.router');
 const addAptRouter = require('./routes/aptSetter.router');
 const confirmationDelete = require('./routes/confirmationDelete.router');
-
+const confirmationTime = require('./routes/ConfirmTimeGet.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +37,7 @@ app.use('/api/slots', aptSlotRouter),
 app.use('/api/barbers', barberRouter),
 app.use('/api/addApt', addAptRouter);
 app.use('/api/confirmationDelete', confirmationDelete);
+app.use('/api/confirmationTime', confirmationTime)
 
 // Serve static files
 app.use(express.static('build'));

@@ -14,11 +14,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                     IS NULL AND "barber_id" = $1 AND "AS".dotw = $2
                     ORDER BY start_time;`;
     const query = req.query
-    console.log('aptSlot router query id', query.id)
-    console.log('aptSlot router date', query.date)
+    // console.log('aptSlot router query id', query.id)
+    // console.log('aptSlot router date', query.date)
     pool.query(sqlText, [req.query.id, req.query.date])
     .then((result) => {
-        console.log(`apptSlot router result.rows ${result.rows}`)
+        // console.log(`apptSlot router result.rows ${result.rows}`)
         res.send(result.rows)
     })
     .catch((error) => {

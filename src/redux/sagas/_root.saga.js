@@ -8,6 +8,7 @@ import aptSlotSaga from './aptSlot.saga';
 import barberSaga from './barber.saga';
 import addAptSaga from './addApt.saga';
 import conDelete from './confirmationDelete.saga';
+import confTime from './confirmationTimeGet.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     barberSaga(),
     addAptSaga(),
     conDelete(),
+    confTime(),
   ]);
 }
