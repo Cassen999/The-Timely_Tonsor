@@ -6,7 +6,8 @@ import allUsers from './allUsers.reducer';
 import aptSlots from './aptSlot.reducer';
 import barbers from './barber.reducer';
 import addApt from './addApt.reducer';
-import confTime from './confirmationTimeGet.reducer'
+import confTime from './confirmationTimeGet.reducer';
+import confBarber from './confirmationBarberGet.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   aptSlots,
   barbers,
   addApt,
-  confTime
+  confTime,
+  confBarber
 });
 
 export default rootReducer;

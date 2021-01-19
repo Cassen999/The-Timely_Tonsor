@@ -128,8 +128,11 @@ class SchedulingOptions extends Component {
   }
 
   chooseApt = (event) => {
-    this.props.dispatch({type: 'ADD_APPOINTMENT', 
-          payload: this.state})
+    if (this.state.date !== '' && this.state.apt_id !== ''
+        && this.state.barber !== '' && this.state.dotw !== '') {
+          this.props.dispatch({type: 'ADD_APPOINTMENT', 
+                payload: this.state})
+        }
   }
 
   handleBack = (event) => {
@@ -141,10 +144,6 @@ class SchedulingOptions extends Component {
     return (
     <div>
       <h2>Please schedule your appointment below</h2>
-        {/* {JSON.stringify(this.props.store.user)} */}
-        {/* {JSON.stringify(this.state)}
-        {JSON.stringify(this.props.store.aptSlots)} */}
-        {JSON.stringify(this.props.store.addApt)}
       <h3>Choose Your Appointment Details</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.root}>

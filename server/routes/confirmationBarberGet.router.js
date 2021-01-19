@@ -6,19 +6,20 @@ const {
   } = require('../modules/authentication-middleware');
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    // GETs time of the appointment being confirmed
+    // GETs barber name of the appointment being confirmed
     const id = req.params.id
-    const sqlText = `SELECT "start_time" FROM "appointment_slots" AS "AS"
-                      JOIN "user_appointment" AS "UA" ON "UA".appt_id = "AS".id
-                      WHERE "UA".id = $1;`;
+    const sqlText = `SELECT "first_name" FROM "user" AS "U"
+                        JOIN "appointment_slots" AS "AS" ON "U".id = "AS".barber_id
+                        JOIN "user_appointment" AS "UA" ON "AS".id = "UA".appt_id
+                        WHERE "UA".appt_id = $1;`;
     console.log('ConfirmTimeGet req.body', req.params.id)
     pool.query(sqlText, [id])
     .then((result) => {
-      console.log('ConfirmTimeGet router result.rows', result.rows)
+      console.log('ConfirmBarberGet router result.rows', result.rows)
       res.send(result.rows)
     })
     .catch((error) => {
-      console.log('ConfirmTimeGet error', error)
+      console.log('ConfirmBarberGet error', error)
       res.sendStatus(500)
     })
 });

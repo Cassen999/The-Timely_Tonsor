@@ -9,6 +9,7 @@ import barberSaga from './barber.saga';
 import addAptSaga from './addApt.saga';
 import conDelete from './confirmationDelete.saga';
 import confTime from './confirmationTimeGet.saga';
+import confBarber from './confirmationBarberGet.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     addAptSaga(),
     conDelete(),
     confTime(),
+    confBarber(),
   ]);
 }
