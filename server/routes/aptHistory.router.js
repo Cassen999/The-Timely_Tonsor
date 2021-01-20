@@ -11,7 +11,7 @@ const {
     const sqlText = `SELECT "first_name", "start_time", "date" FROM "user" AS "U" 
                       JOIN "appointment_slots" AS "AS" ON "U".id = "AS".barber_id
                       JOIN "user_appointment" AS "UA" ON "UA".appt_id = "AS".id
-                      WHERE "UA".user_id = 2
+                      WHERE "UA".user_id = $1
                       ORDER BY "date" DESC 
                       LIMIT 10;`
     pool.query(sqlText, [id])
