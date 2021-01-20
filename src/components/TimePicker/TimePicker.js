@@ -8,27 +8,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import moment from 'moment';
 
 
 const styles = (theme) => ({
     root: {
       flexGrow: 1,
-    },
-    button: {
-      margin: theme.spacing.unit,
-    },
-    leftIcon: {
-      marginRight: theme.spacing.unit,
-    },
-    rightIcon: {
-      marginLeft: theme.spacing.unit,
-    },
-    iconSmall: {
-      fontSize: 20,
-    },
-    gridItem: {
-      flexBasis: 0,
     },
     paper: {
       padding: theme.spacing.unit * 1,
@@ -54,28 +38,13 @@ const styles = (theme) => ({
     menu: {
       width: 200,
     },
-    buttonContainer: {
-      float: 'right'
-    },
     formControl: {
       minWidth: 190,
       maxWidth: 300,
     },
-    selectEmpty: {
-        marginTop: theme.spacing.unit * 2,
-    },
   });
 
 class TimePicker extends Component {
-  state = {
-    apt_id: '',
-    time: ''
-  };
-
-  // componentDidMount() {
-  //   this.props.dispatch({type: 'FETCH_ALL_USERS'})
-  // }
-
   render() {
     const { classes } = this.props;
     return (
@@ -92,7 +61,7 @@ class TimePicker extends Component {
                             // pass in event and input property for handleChange
                             onChange={(event) => this.props.setTime(event)}
                             >
-                                {/* map genres to populate the dropdown */}
+                                {/* map appointment slots to populate the dropdown */}
                             {this.props.store.aptSlots.map((slot) => {
                               return(
                                 <MenuItem value={slot.id}>{slot.start_time}</MenuItem>
