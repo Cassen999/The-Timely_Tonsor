@@ -13,10 +13,6 @@ const styles = (theme) => ({
   }
 });
 
-const doNothing = () => {
-    console.log('Dont do anything')
-}
-
 const DisableSelectBtn = (props) => (
   <Button
     // This button shows up in multiple locations and is styled differently
@@ -25,7 +21,7 @@ const DisableSelectBtn = (props) => (
     className={props.className}
     color="primary"
     variant="contained"
-    disabled="true"
+    disabled
   >
     Select Appointment
   </Button>

@@ -154,13 +154,12 @@ class UserLandingPage extends Component {
         <div className={classes.buttonContainer}>
           <Button 
             color="primary"
-            className="btn"
             type="submit"
             variant="contained" 
             size="small" 
             value="Register"
             className={classes.button}>
-            <SaveIcon className={classes.leftIcon, classes.iconSmall} />
+            <SaveIcon className={classes.iconSmall} />
             Save
           </Button>
         </div>

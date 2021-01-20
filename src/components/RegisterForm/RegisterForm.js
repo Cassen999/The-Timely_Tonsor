@@ -173,8 +173,9 @@ class RegisterForm extends Component {
             variant="contained" 
             size="small" 
             value="Register"
+            color="primary"
             className={classes.button}>
-            <SaveIcon className={classes.leftIcon, classes.iconSmall} />
+            <SaveIcon className={classes.iconSmall} />
             Register
           </Button>
         </div>

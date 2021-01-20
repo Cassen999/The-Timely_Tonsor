@@ -155,7 +155,7 @@ class SchedulingOptions extends Component {
         {this.state.date !== '' ? <BarberPicker state={this.state} 
          setBarber={this.setBarber} setTime={this.setTime}/> : <p>Please choose a date</p>}
   
-        {this.state.apt_id !== '' && this.state.clicked == false ? 
+        {this.state.apt_id !== '' && this.state.clicked === false ? 
           <div>
             <p>Click this button to book your appointment then press Continue</p>
             <Button 
