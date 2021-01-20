@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import BarberPicker from '../BarberPicker/BarberPicker';
-import AptConfirmation from '../AptConfirmation/AptConfirmation';
 import DisableSelectBtn from '../DisableSelectBtn/DisableSelectBtn';
 
 const styles = (theme) => ({

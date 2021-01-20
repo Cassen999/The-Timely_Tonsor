@@ -56,7 +56,6 @@ const styles = (theme) => ({
 
 
 class UserLandingPage extends Component {
-  // this component doesn't do much to start, just renders some user info to the DOM
   state = {
     username: this.props.store.user.username,
     first_name: this.props.store.user.first_name,
@@ -176,7 +175,6 @@ class UserLandingPage extends Component {
             variant="contained" 
             size="large" 
             className={classes.button}>
-            <SaveIcon className={classes.leftIcon, classes.iconSmall} />
             Make an Appointment
           </Button>
         </div>
@@ -185,5 +183,4 @@ class UserLandingPage extends Component {
     }
   }
 
-// this allows us to use <App /> in index.js
 export default withStyles(styles)(connect(mapStoreToProps)(UserLandingPage));
