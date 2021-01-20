@@ -44,6 +44,9 @@ class AptHistoryTable extends Component {
     
   render() {
     const { classes } = this.props;
+    const handleDate = (date) => {
+      return (date = new Date(date).toDateString());
+    };
     return (
       <div>
         <h2>Appointment History and Future Appointments</h2>
@@ -59,7 +62,7 @@ class AptHistoryTable extends Component {
                 <TableBody>
                   {this.props.store.history.map(apt => (
                     <TableRow key={apt.id}>
-                      <TableCell align="right">{apt.date}</TableCell>
+                      <TableCell align="right">{handleDate(apt.date)}</TableCell>
                       <TableCell align="right">{apt.start_time}</TableCell>
                       <TableCell align="right">{apt.first_name}</TableCell>
                     </TableRow>
