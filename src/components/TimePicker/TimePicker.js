@@ -72,9 +72,9 @@ class TimePicker extends Component {
     time: ''
   };
 
-  componentDidMount() {
-    this.props.dispatch({type: 'FETCH_ALL_USERS'})
-  }
+  // componentDidMount() {
+  //   this.props.dispatch({type: 'FETCH_ALL_USERS'})
+  // }
 
   render() {
     const { classes } = this.props;

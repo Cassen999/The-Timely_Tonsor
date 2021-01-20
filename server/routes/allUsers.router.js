@@ -18,4 +18,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   })
 });
 
+// DELETE THIS IF FETCH ALL USERS ON SCHEDULING OPTIONS WORKS WITHOUT DISPATCH
+
 module.exports = router;

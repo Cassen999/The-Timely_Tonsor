@@ -21,14 +21,14 @@ const styles = (theme) => ({
 
 class AptConfirmation extends Component {
 
-  componentDidMount() {
-    // Dispatches to get appointment time of set appointment
-    // and the name of the barber
-    this.props.dispatch({type: 'FETCH_CONF_TIME', 
-      payload: this.props.store.addApt.id})
-    this.props.dispatch({type: 'FETCH_CONF_BARBER', 
-      payload: this.props.store.addApt.appt_id})
-  }
+  // componentDidMount() {
+  //   // Dispatches to get appointment time of set appointment
+  //   // and the name of the barber
+  //   this.props.dispatch({type: 'FETCH_CONF_TIME', 
+  //     payload: this.props.store.addApt.id})
+  //   this.props.dispatch({type: 'FETCH_CONF_BARBER', 
+  //     payload: this.props.store.addApt.appt_id})
+  // }
 
   // Back button function also deletes the appointment that was set
   goBack = (event) => {
@@ -55,10 +55,10 @@ class AptConfirmation extends Component {
         {handleDate(date)}
         <h3>Time</h3>
         {/* Call redux store for time, make it wait until it is created */}
-        <p>{this.props.store.confTime[0]?.start_time}</p>
+        <p>{this.props.store.addApt.start_time}</p>
         <h3>Your Barber</h3>
         {/* Call redux store for barber name, make it wait until it is created */}
-        <p>{this.props.store.confBarber[0]?.first_name}</p>
+        <p>{this.props.store.addApt.first_name}</p>
         <button onClick={(event) => this.goBack(event)}>back</button>
         <div>
           <Button 

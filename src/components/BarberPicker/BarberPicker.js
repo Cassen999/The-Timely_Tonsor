@@ -70,7 +70,7 @@ class BarberPicker extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_ALL_USERS'})
+    this.props.dispatch({type: 'FETCH_BARBERS'})
   }
 
   render() {

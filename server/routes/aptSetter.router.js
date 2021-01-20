@@ -17,7 +17,11 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
       pool.query(queryText, [user_id, date, apt_id])
       .then( (result) => {
         // nest a query to get the most recent data to compare and show on dom
-        const queryText2 = `SELECT * FROM "user_appointment" WHERE id = $1;`
+        const queryText2 = `SELECT "U".first_name, "UA".date, "AS".start_time, 
+                            "UA".id FROM "user_appointment" AS "UA"
+                            JOIN "appointment_slots" AS "AS" ON "UA"."appt_id" = "AS".id
+                            JOIN "user" AS "U" ON "U".id = "AS".barber_id 
+                            WHERE "UA".id = $1;`
         pool.query(queryText2, [result.rows[0].id])
         .then( (result) => {
             res.send(result.rows[0])

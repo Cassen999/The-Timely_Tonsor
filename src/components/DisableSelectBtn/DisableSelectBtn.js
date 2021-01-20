@@ -25,9 +25,9 @@ const DisableSelectBtn = (props) => (
     className={props.className}
     color="primary"
     variant="contained"
-    onClick={doNothing}
+    disabled="true"
   >
-    Appointment Set!
+    Select Appointment
   </Button>
 );
 

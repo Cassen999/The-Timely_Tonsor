@@ -78,13 +78,13 @@ class SchedulingOptions extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_ALL_USERS'})
+    // if the app breaks, check this, otherwise remove it
+    // this.props.dispatch({type: 'FETCH_ALL_USERS'})
     this.props.dispatch({type: 'FETCH_BARBERS'})
-    console.log(this.props.store.allUsers)
     console.log(this.props.store.barbers)
   }
 
-  handleInputChangeFor = (event) => {
+  handleInputChangeForDate = (event) => {
     event.preventDefault();
     this.setState({
       date: event.target.value,
@@ -109,30 +109,25 @@ class SchedulingOptions extends Component {
     console.log('setTime event.target', event.target)
   }
 
-  handleConfirmationRoute = (event, id) => {
-    event.preventDefault()
-    if (this.state.date !== '' && this.state.apt_id !== ''
-        && this.state.barber !== '' && this.state.dotw !== '') {
-          console.log('In handleConfirmationRoute, id: ', id)
-          this.props.history.push(`/confirm/${id}`)
-          this.setState({
-            user_id: Number(this.props.store.user.id),
-            apt_id: '',
-            date: '',
-            dotw: '',
-            barber: '',
-            time: ''
-          })
-        }
-        else {
-          alert('Please fill out all fields to proceed to appointment confirmation')
-        }
-  }
-
-  disableButton = (btn) => {
-    document.getElementById(btn.selectBtn).disabled = true;
-    alert('Appointment already submitted')
-  }
+  // handleConfirmationRoute = (event, id) => {
+  //   event.preventDefault()
+  //   if (this.state.date !== '' && this.state.apt_id !== ''
+  //       && this.state.barber !== '' && this.state.dotw !== '') {
+  //         console.log('In handleConfirmationRoute, id: ', id)
+  //         this.props.history.push(`/confirm/${id}`)
+  //         this.setState({
+  //           user_id: Number(this.props.store.user.id),
+  //           apt_id: '',
+  //           date: '',
+  //           dotw: '',
+  //           barber: '',
+  //           time: ''
+  //         })
+  //       }
+  //       else {
+  //         alert('Please fill out all fields to proceed to appointment confirmation')
+  //       }
+  // }
 
   chooseApt = () => {
     if (this.state.date !== '' && this.state.apt_id !== ''
@@ -140,10 +135,11 @@ class SchedulingOptions extends Component {
           this.props.dispatch({type: 'ADD_APPOINTMENT', 
                 payload: this.state})
           this.setState({clicked: true})
+          this.props.history.push(`/confirm/${this.props.store.user.id}`)
         }
-    if (this.state.clicked === true) {
-      this.disableButton()
-    }
+        else {
+          alert('Please fill out all fields to proceed to appointment confirmation')
+        }
   }
 
   handleBack = (event) => {
@@ -156,7 +152,6 @@ class SchedulingOptions extends Component {
     <div>
       <h2>Please schedule your appointment below</h2>
       <h3>Choose Your Appointment Details</h3>
-        <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.root}>
             
             {/* Date Picker */}
@@ -170,7 +165,7 @@ class SchedulingOptions extends Component {
                     label="Select a Date"
                     type="date"
                     value={this.state.date}
-                    onChange={this.handleInputChangeFor}
+                    onChange={this.handleInputChangeForDate}
                     className={classes.textField}
                     InputLabelProps={{
                       shrink: true,
@@ -180,11 +175,10 @@ class SchedulingOptions extends Component {
               </Grid>
             </Grid>
           </div>
-        </form>
         {this.state.date !== '' ? <BarberPicker state={this.state} 
          setBarber={this.setBarber} setTime={this.setTime}/> : <p>Please choose a date</p>}
   
-        {this.state.apt_id !== '' ? 
+        {this.state.apt_id !== '' && this.state.clicked == false ? 
           <div>
             <p>Click this button to book your appointment then press Continue</p>
             <Button 
@@ -195,7 +189,7 @@ class SchedulingOptions extends Component {
               variant="contained" 
               size="large" 
               className={classes.button}>
-              {this.state.clicked === false ? 'Select Appointment' : 'Appointment Set!'}
+                Select Appointment
             </Button>
           </div> : 
           <DisableSelectBtn />}
@@ -210,14 +204,14 @@ class SchedulingOptions extends Component {
           </Button>
         </div>
         <div>
-          <Button 
+          {/* <Button 
             onClick={(event) => this.handleConfirmationRoute(event, this.props.store.user.id)}
             color="primary"
             variant="contained" 
             size="large" 
             className={classes.button}>
             Continue
-          </Button>
+          </Button> */}
         </div>
       </div>
     );
