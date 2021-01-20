@@ -3,13 +3,10 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import appointmentSaga from './appointment.saga';
-import allUsersSaga from './allUsers.saga';
 import aptSlotSaga from './aptSlot.saga';
 import barberSaga from './barber.saga';
 import addAptSaga from './addApt.saga';
-import conDelete from './confirmationDelete.saga';
-import confTime from './confirmationTimeGet.saga';
-import confBarber from './confirmationBarberGet.saga';
+import deleteSaga from './delete.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -24,12 +21,9 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     appointmentSaga(),
-    allUsersSaga(),
     aptSlotSaga(),
     barberSaga(),
     addAptSaga(),
-    conDelete(),
-    confTime(),
-    confBarber(),
+    deleteSaga(),
   ]);
 }

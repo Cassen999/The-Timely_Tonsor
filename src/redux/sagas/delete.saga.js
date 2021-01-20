@@ -4,7 +4,7 @@ import { takeLatest } from 'redux-saga/effects';
 function* deleteApt(action) {
     const id = action.payload
     try {
-        yield axios.delete(`/api/confirmationDelete/${id}`)
+        yield axios.delete(`/api/delete/${id}`)
         console.log('action.payload from confirmation delete saga', id)
     }catch(error){
         console.log('error in delete saga', error);
@@ -13,7 +13,7 @@ function* deleteApt(action) {
 }
 
 function* confirmationDeleteSaga() {
-    yield takeLatest('CON_DELETE', deleteApt);
+    yield takeLatest('DELETE', deleteApt);
 }
 
 export default confirmationDeleteSaga;

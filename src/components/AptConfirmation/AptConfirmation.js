@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import LogOutButtonStyled from '../LogOutButtonStyled/LogOutButtonStyled';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -44,17 +43,6 @@ class AptConfirmation extends Component {
         <h3>Your Barber</h3>
         {/* Call redux store for barber name */}
         <p>{this.props.store.addApt.first_name}</p>
-        <button onClick={(event) => this.goBack(event)}>back</button>
-        <div>
-          <Button 
-            onClick={(event) => this.goBack(event)}
-            color="primary"
-            variant="contained" 
-            size="large" 
-            className={classes.button}>
-            Delete and Remake Appointment
-          </Button>
-        </div>
         <div>
           <Button 
             onClick={(event) => this.finished(event)}

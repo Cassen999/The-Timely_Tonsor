@@ -10,24 +10,6 @@ import Select from '@material-ui/core/Select';
 import TimePicker from '../TimePicker/TimePicker';
 
 const styles = (theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    button: {
-      margin: theme.spacing.unit,
-    },
-    leftIcon: {
-      marginRight: theme.spacing.unit,
-    },
-    rightIcon: {
-      marginLeft: theme.spacing.unit,
-    },
-    iconSmall: {
-      fontSize: 20,
-    },
-    gridItem: {
-      flexBasis: 0,
-    },
     paper: {
       padding: theme.spacing.unit * 1,
       textAlign: 'center',
@@ -39,35 +21,16 @@ const styles = (theme) => ({
       display: 'flex',
       flexWrap: 'wrap',
     },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 200,
-      color: 'white',
-      justifyContent: 'center'
-    },
     dense: {
       marginTop: 19,
-    },
-    menu: {
-      width: 200,
-    },
-    buttonContainer: {
-      float: 'right'
     },
     formControl: {
       minWidth: 190,
       maxWidth: 300,
     },
-    selectEmpty: {
-        marginTop: theme.spacing.unit * 2,
-    },
   });
 
 class BarberPicker extends Component {
-  state = {
-    barber: '',
-  };
 
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_BARBERS'})
