@@ -11,11 +11,12 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const appointmentRouter = require('./routes/appointment.router');
+const barberAptRouter = require('./routes/barberApt.router');
 const aptSlotRouter = require('./routes/aptSlot.router');
 const barberRouter = require('./routes/barber.router');
 const addAptRouter = require('./routes/aptSetter.router');
 const deleteRouter = require('./routes/delete.router');
+const aptHistoryRouter = require('./routes/aptHistory.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,11 +31,12 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/appointments', appointmentRouter)
+app.use('/api/barberApt', barberAptRouter)
 app.use('/api/slots', aptSlotRouter),
 app.use('/api/barbers', barberRouter),
 app.use('/api/addApt', addAptRouter);
 app.use('/api/delete', deleteRouter);
+app.use('/api/history', aptHistoryRouter);
 
 // Serve static files
 app.use(express.static('build'));

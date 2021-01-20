@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import appointments from './appointment.reducer';
+import barberApt from './barberApt.reducer';
 import aptSlots from './aptSlot.reducer';
 import barbers from './barber.reducer';
 import addApt from './addApt.reducer';
+import history from './history.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -15,10 +16,11 @@ import addApt from './addApt.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  appointments,
+  barberApt,
   aptSlots,
   barbers,
   addApt,
+  history
 });
 
 export default rootReducer;

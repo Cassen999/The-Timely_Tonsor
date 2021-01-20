@@ -1,12 +1,12 @@
-const appointmentReducer = (state = [], action) => {
+const aptHistoryReducer = (state = [], action) => {
     const newData = Object.entries(state)
     switch (action.type) {
-      case 'SET_APPOINTMENTS':
-        console.log('appointmentReducer action.payload', action.payload)
+      case 'SET_HISTORY':
+        console.log('apt history action.payload', action.payload)
         return action.payload;
-      case 'UNSET_APPOINTMENTS':
+      case 'UNSET_HISTORY':
         return [];
-      case 'UPDATE_APPOINTMENTS':
+      case 'UPDATE_HISTORY':
         return newData.map((user) => 
           user.id === action.payload.id ? action.payload : user
         );
@@ -15,4 +15,4 @@ const appointmentReducer = (state = [], action) => {
     }
   };
 
-export default appointmentReducer
+export default aptHistoryReducer

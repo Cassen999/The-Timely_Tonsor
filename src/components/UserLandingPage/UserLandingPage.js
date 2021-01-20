@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import AptHistoryTable from '../AptHistoryTable/AptHistoryTable';
 
 const styles = (theme) => ({
   root: {
@@ -176,6 +177,9 @@ class UserLandingPage extends Component {
             className={classes.button}>
             Make an Appointment
           </Button>
+        </div>
+        <div className="aptTable">
+          <AptHistoryTable />
         </div>
       </div>
       );

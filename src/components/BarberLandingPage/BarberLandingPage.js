@@ -10,11 +10,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
-// Basic class component structure for React with default state
-// value setup. When making a new component be sure to replace
-// the component name TemplateClass with the name for the new
-// component.
-
 const styles = theme => ({
     root: {
       width: '100%',
@@ -43,7 +38,6 @@ class BarberLandingPage extends Component {
     isBarber: false,
   }
     
-    // componentDidMount -> GET appointments, map redux state 
   componentDidMount() {
       this.props.dispatch({type: 'FETCH_APPOINTMENTS'})
   }
