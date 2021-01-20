@@ -78,8 +78,6 @@ class SchedulingOptions extends Component {
   };
 
   componentDidMount() {
-    // if the app breaks, check this, otherwise remove it
-    // this.props.dispatch({type: 'FETCH_ALL_USERS'})
     this.props.dispatch({type: 'FETCH_BARBERS'})
     console.log(this.props.store.barbers)
   }
@@ -108,26 +106,6 @@ class SchedulingOptions extends Component {
     })
     console.log('setTime event.target', event.target)
   }
-
-  // handleConfirmationRoute = (event, id) => {
-  //   event.preventDefault()
-  //   if (this.state.date !== '' && this.state.apt_id !== ''
-  //       && this.state.barber !== '' && this.state.dotw !== '') {
-  //         console.log('In handleConfirmationRoute, id: ', id)
-  //         this.props.history.push(`/confirm/${id}`)
-  //         this.setState({
-  //           user_id: Number(this.props.store.user.id),
-  //           apt_id: '',
-  //           date: '',
-  //           dotw: '',
-  //           barber: '',
-  //           time: ''
-  //         })
-  //       }
-  //       else {
-  //         alert('Please fill out all fields to proceed to appointment confirmation')
-  //       }
-  // }
 
   chooseApt = () => {
     if (this.state.date !== '' && this.state.apt_id !== ''
@@ -202,16 +180,6 @@ class SchedulingOptions extends Component {
             className={classes.button}>
             Back
           </Button>
-        </div>
-        <div>
-          {/* <Button 
-            onClick={(event) => this.handleConfirmationRoute(event, this.props.store.user.id)}
-            color="primary"
-            variant="contained" 
-            size="large" 
-            className={classes.button}>
-            Continue
-          </Button> */}
         </div>
       </div>
     );
