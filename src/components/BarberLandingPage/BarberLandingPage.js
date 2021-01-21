@@ -34,23 +34,16 @@ const styles = theme => ({
 class BarberLandingPage extends Component {
 
   state = {
-    date: '',
-    isBarber: false,
-  }
-    
-  componentDidMount() {
-      // this.props.dispatch({type: 'FETCH_APPOINTMENTS'})
+    date: ''
   }
 
-  handleInputChangeFor = (event) => {
+  handleSelectDate = (event) => {
     this.setState({
       date: event.target.value,
     });
-  };
-
-  handleSelectDate = (event) => {
-    event.preventDefault()
-    console.log('in SelectDate')
+    this.props.dispatch({type: 'FETCH_BARBER_APT', 
+      payload: {id: this.props.store.user.id, date: event.target.value}})
+    console.log('in SelectDate id then date', this.props.store.user.id, event.target.value)
   }
     
   render() {
@@ -65,16 +58,16 @@ class BarberLandingPage extends Component {
             id="date"
             label="Today's Date"
             type="date"
+            onChange={this.handleSelectDate}
             value={this.state.date}
-            onChange={this.handleInputChangeFor}
             className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
-          />
+            />
+            {JSON.stringify(this.state)}
           </div>
         </form>
-        {JSON.stringify(this.state)}
         {/* <h3>Today's date is {this.state.date} and it is a {this.props.store.appointments.dotw}</h3> */}
         <Paper className={classes.root}>
             <Table className={classes.table}>
@@ -85,14 +78,12 @@ class BarberLandingPage extends Component {
                         <TableCell align="right">Delete?</TableCell>
                     </TableRow>
                 </TableHead>
+                {JSON.stringify(this.props.store.barberApt)}
                 <TableBody>
-                    {/* {this.props.store.appointments.map((appointment) => {
-                        if (appointment.name !== '') {
-                            return <TableCell align="right">{this.props.store.appointments.user_id.name}</TableCell>
-                        }
-                        if (appointment.time !== '') {
-                            return <TableCell align="right">{this.props.store.appointments.time}</TableCell>
-                        }
+                    {/* {this.props.store.barberApt.map((apt, i) => {
+                      return( 
+                        <TableCell key={i} align="right">{apt.date}</TableCell>
+                      )
                     })} */}
                 </TableBody>
             </Table>

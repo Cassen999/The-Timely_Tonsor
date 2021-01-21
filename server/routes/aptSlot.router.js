@@ -13,7 +13,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
                     ON UA."appt_id" = "AS".id WHERE UA.appt_id 
                     IS NULL AND "barber_id" = $1 AND "AS".dotw = $2
                     ORDER BY start_time;`;
-    const query = req.query
     // console.log('aptSlot router query id', query.id)
     // console.log('aptSlot router date', query.date)
     pool.query(sqlText, [req.query.id, req.query.date])

@@ -6,15 +6,16 @@ const {
   } = require('../modules/authentication-middleware');
 
   router.get('/', rejectUnauthenticated, (req, res) => {
-    let id = req.body.id
-    console.log('apt router barber id ', req.body.id)
+    let id = req.query.id
+    let date = req.query.date
+    console.log('apt router req.query ', req.query)
     const sqlText = `SELECT * FROM "appointment_slots" AS "AS"
                       JOIN "user_appointment" AS UA
-                      ON UA."appt_id" = "AS".id WHERE barber_id = $1;`
-    pool.query(sqlText, [id])
+                      ON UA."appt_id" = "AS".id WHERE barber_id = $1 AND UA.date = $2;`
+    pool.query(sqlText, [id, date])
     .then((result) => {
       res.send(result.rows)
-      console.log(result.rows)
+      console.log('barberApt result.rows', result.rows)
     })
     .catch((error) => {
       console.log('ERROR making UA db GET query', error)
