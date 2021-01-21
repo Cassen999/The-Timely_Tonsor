@@ -9,7 +9,8 @@ const {
     let id = req.query.id
     let date = req.query.date
     console.log('apt router req.query ', req.query)
-    const sqlText = `SELECT "date", "start_time", "first_name" 
+    const sqlText = `SELECT "date", "start_time", "first_name", "U"."id",
+                      "appt_id" 
                       FROM "appointment_slots" AS "AS"
                       JOIN "user_appointment" AS UA ON 
                       UA."appt_id" = "AS".id 

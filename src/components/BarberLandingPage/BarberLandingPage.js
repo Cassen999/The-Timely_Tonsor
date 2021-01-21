@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
     root: {
@@ -29,7 +31,20 @@ const styles = theme => ({
       width: 200,
       color: 'white'
     },
+    rightIcon: {
+      marginLeft: theme.spacing.unit,
+    },
+    iconSmall: {
+      fontSize: 20,
+    },
+    deleteBtn: {
+      justifyContent: 'center'
+    }
   });
+
+  const handleDate = (date) => {
+    return (date = new Date(date).toDateString());
+  };
 
 class BarberLandingPage extends Component {
 
@@ -45,18 +60,27 @@ class BarberLandingPage extends Component {
       payload: {id: this.props.store.user.id, date: event.target.value}})
     console.log('in SelectDate id then date', this.props.store.user.id, event.target.value)
   }
+
+  handleDelete = (appt_id, id, date) => {
+    this.props.dispatch({type: 'DELETE', payload: {aptId: appt_id, userId: id, date: date, 
+      barberId: this.props.store.user.id}})
+    console.log('handle delete event', appt_id)
+  }
     
   render() {
+    const isDateAfterToday = (date) => {
+      return new Date(date.toDateString()) >= new Date(new Date().toDateString());
+    };
     const { classes } = this.props;
     return (
       <div>
         <h2>BarberLandingPage</h2>
-        <h3>Select today's date</h3>
+        <h3>Choose a date to view schedule</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div>
           <TextField
             id="date"
-            label="Today's Date"
+            label="Choose a Date"
             type="date"
             onChange={this.handleSelectDate}
             value={this.state.date}
@@ -65,26 +89,39 @@ class BarberLandingPage extends Component {
               shrink: true,
             }}
             />
-            {JSON.stringify(this.state)}
           </div>
         </form>
-        {/* <h3>Today's date is {this.state.date} and it is a {this.props.store.appointments.dotw}</h3> */}
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="right">Client Name</TableCell>
+                        <TableCell align="right">Appointment Date</TableCell>
                         <TableCell align="right">Appointment Time</TableCell>
-                        <TableCell align="right">Delete?</TableCell>
+                        <TableCell align="right">Client Name</TableCell>
                     </TableRow>
                 </TableHead>
-                {JSON.stringify(this.props.store.barberApt)}
                 <TableBody>
-                    {/* {this.props.store.barberApt.map((apt, i) => {
+                    {this.props.store.barberApt.map((apt, i) => {
                       return( 
-                        <TableCell key={i} align="right">{apt.date}</TableCell>
+                        <TableRow key={i}>
+                          <TableCell align="right">{handleDate(apt.date)}</TableCell>
+                          <TableCell align="right">{apt.start_time}</TableCell>
+                          <TableCell align="right">{apt.first_name}</TableCell>
+                          <TableCell className="deleteBtn" value={apt.appt_id}>
+                          {isDateAfterToday(new Date(apt.date)) ? 
+                            <Button
+                              align="center"
+                              color="secondary"
+                              variant="contained" 
+                              size="large" 
+                              onClick={() => this.handleDelete(apt.appt_id, apt.id, apt.date)}
+                              className={classes.button}>
+                                <DeleteIcon className={classes.rightIcon} />
+                                delete</Button> : null}
+                          </TableCell>
+                        </TableRow>
                       )
-                    })} */}
+                    })}
                 </TableBody>
             </Table>
         </Paper>

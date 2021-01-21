@@ -1,5 +1,6 @@
 const appointmentReducer = (state = [], action) => {
     const newData = Object.entries(state)
+    const initialState = []
     switch (action.type) {
       case 'SET_BARBER_APT':
         console.log('barberAptReducer action.payload', action.payload)
@@ -11,7 +12,7 @@ const appointmentReducer = (state = [], action) => {
           user.id === action.payload.id ? action.payload : user
         );
       default:
-        return state;
+        return initialState;
     }
   };
 
