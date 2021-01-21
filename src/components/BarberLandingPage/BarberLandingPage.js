@@ -39,7 +39,7 @@ class BarberLandingPage extends Component {
   }
     
   componentDidMount() {
-      this.props.dispatch({type: 'FETCH_APPOINTMENTS'})
+      // this.props.dispatch({type: 'FETCH_APPOINTMENTS'})
   }
 
   handleInputChangeFor = (event) => {
@@ -75,7 +75,7 @@ class BarberLandingPage extends Component {
           </div>
         </form>
         {JSON.stringify(this.state)}
-        <h3>Today's date is {this.state.date} and it is a {this.props.store.appointments.dotw}</h3>
+        {/* <h3>Today's date is {this.state.date} and it is a {this.props.store.appointments.dotw}</h3> */}
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>

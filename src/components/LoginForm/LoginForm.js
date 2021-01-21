@@ -45,7 +45,8 @@ class LoginForm extends Component {
   state = {
     username: '',
     password: '',
-    showPassword: false
+    showPassword: false,
+    is_barber: ''
   };
 
   login = (event) => {
