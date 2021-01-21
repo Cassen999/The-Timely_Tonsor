@@ -90,7 +90,7 @@ class UserLandingPage extends Component {
     return (
       <div>
         <div>
-          <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+          <h1 id="welcome">Welcome, {this.props.store.user.first_name}!</h1>
           <p>From here, you can edit any profile information, or click the 
             Schedule Appointment button to schedule an appointment</p>
           <p>To edit your profile information, just type into the corresponding

@@ -8,7 +8,7 @@ const {
   router.get('/:id', rejectUnauthenticated, (req, res) => {
     let id = req.params.id
     console.log('apt history router user id ', req.params.id)
-    const sqlText = `SELECT "first_name", "start_time", "date" FROM "user" AS "U" 
+    const sqlText = `SELECT "first_name", "start_time", "date", "appt_id" FROM "user" AS "U" 
                       JOIN "appointment_slots" AS "AS" ON "U".id = "AS".barber_id
                       JOIN "user_appointment" AS "UA" ON "UA".appt_id = "AS".id
                       WHERE "UA".user_id = $1
