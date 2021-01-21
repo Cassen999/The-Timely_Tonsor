@@ -9,9 +9,12 @@ const {
     let id = req.query.id
     let date = req.query.date
     console.log('apt router req.query ', req.query)
-    const sqlText = `SELECT * FROM "appointment_slots" AS "AS"
-                      JOIN "user_appointment" AS UA
-                      ON UA."appt_id" = "AS".id WHERE barber_id = $1 AND UA.date = $2;`
+    const sqlText = `SELECT "date", "start_time", "first_name" 
+                      FROM "appointment_slots" AS "AS"
+                      JOIN "user_appointment" AS UA ON 
+                      UA."appt_id" = "AS".id 
+                      JOIN "user" AS "U" ON UA."user_id" = "U".id 
+                      WHERE barber_id = $1 AND UA.date = $2;`
     pool.query(sqlText, [id, date])
     .then((result) => {
       res.send(result.rows)
