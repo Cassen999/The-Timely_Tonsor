@@ -1,5 +1,8 @@
 footer {
   margin-top: 80px;
   padding: 20px;
-  text-align: center;
+  bottom: 0px;
+  width: 100%;
+  color: rgb(230, 228, 228);
+  position: scroll;
 }

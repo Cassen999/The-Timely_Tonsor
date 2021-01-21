@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import LogoutButtonStyled from '../LogOutButtonStyled/LogOutButtonStyled';
 
 const styles = theme => ({
     root: {
@@ -26,8 +27,7 @@ const styles = theme => ({
       flexWrap: 'wrap',
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
+      margin: theme.spacing.unit * 1.5,
       width: 200,
       color: 'white'
     },
@@ -39,7 +39,7 @@ const styles = theme => ({
     },
     deleteBtn: {
       justifyContent: 'center'
-    }
+    },
   });
 
   const handleDate = (date) => {
@@ -74,21 +74,23 @@ class BarberLandingPage extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <h2>BarberLandingPage</h2>
+        <h2>Welcome {this.props.store.user.first_name}</h2>
         <h3>Choose a date to view schedule</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
-          <div>
-          <TextField
-            id="date"
-            label="Choose a Date"
-            type="date"
-            onChange={this.handleSelectDate}
-            value={this.state.date}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            />
+          <div className="schedPicker">
+            <Paper className={classes.root}>
+              <TextField
+                id="date"
+                label="Choose a Date"
+                type="date"
+                onChange={this.handleSelectDate}
+                value={this.state.date}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                />
+              </Paper>
           </div>
         </form>
         <Paper className={classes.root}>
@@ -125,6 +127,7 @@ class BarberLandingPage extends Component {
                 </TableBody>
             </Table>
         </Paper>
+        <LogoutButtonStyled />
       </div>
     );
   }
