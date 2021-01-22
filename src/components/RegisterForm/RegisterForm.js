@@ -46,6 +46,13 @@ const styles = theme => ({
   iconSmall: {
     fontSize: 20,
   },
+  regDropdown: {
+    display: 'flex',
+    width: '70%',
+    justifyContent: 'center',
+    margin: 'auto',
+    marginTop: 5
+  },
 });
 
 class RegisterForm extends Component {
@@ -114,7 +121,6 @@ class RegisterForm extends Component {
               className={classes.textField}
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
-              margin="normal"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -156,8 +162,8 @@ class RegisterForm extends Component {
             margin="normal"
           />
         </div>
-        <div>
-        <InputLabel htmlFor="Are you a barber?">Are you a barber or client?</InputLabel>
+        <div className={classes.regDropdown}>
+          <InputLabel htmlFor="Are you a barber?">Are you a barber or client?</InputLabel>
           <Select
             value={this.state.is_barber}
             onChange={this.handleInputChangeFor('is_barber')}
@@ -166,9 +172,8 @@ class RegisterForm extends Component {
             <MenuItem value={false}>Client</MenuItem>
           </Select>
         </div>
-        <div>
+        <div className={classes.submitForm}>
           <Button 
-            classname="btn"
             type="submit"
             variant="contained" 
             size="small" 
