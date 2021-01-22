@@ -15,7 +15,10 @@ const styles = (theme) => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
       width: 300,
-      height:55
+      height:55,
+      margin: 'auto',
+      marginTop: '10px',
+      marginBottom: '10px'
     },
     container: {
       display: 'flex',
@@ -28,6 +31,16 @@ const styles = (theme) => ({
       minWidth: 190,
       maxWidth: 300,
     },
+    pickerInstructons: {
+      color: 'black',
+      // color: '#f5deb3',
+      textAlign: 'center',
+      backgroundColor: '#a9a9a9',
+      borderRadius: 5,
+      opacity: '80%',
+      width: '60%',
+      margin: 'auto',
+    }
   });
 
 class BarberPicker extends Component {
@@ -40,7 +53,7 @@ class BarberPicker extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <h2>Choose a Barber</h2>
+        <h2 className={classes.pickerInstructons}>Choose a Barber</h2>
             <Paper className={classes.paper}>
             <div>
                 <FormControl className={classes.formControl}>
@@ -60,8 +73,8 @@ class BarberPicker extends Component {
                 </FormControl>
             </div>
         </Paper>
-        {this.props.state.barber !== '' ? <TimePicker state={this.props.state} 
-        setTime={this.props.setTime} /> : <p>Please choose a Barber</p>}
+        {this.props.state.barber === '' ? <p>Choose a Barber</p>  : 
+        <TimePicker state={this.props.state} setTime={this.props.setTime} />}
       </div>
     );
   }

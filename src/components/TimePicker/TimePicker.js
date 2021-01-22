@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -13,17 +12,17 @@ import Select from '@material-ui/core/Select';
 const styles = (theme) => ({
     root: {
       flexGrow: 1,
+      margin: 'auto'
     },
     paper: {
       padding: theme.spacing.unit * 1,
       textAlign: 'center',
       color: theme.palette.text.secondary,
       width: 300,
-      height:55
-    },
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
+      height:55,
+      margin: 'auto',
+      marginTop: '10px',
+      marginBottom: '10px'
     },
     textField: {
       marginLeft: theme.spacing.unit,
@@ -42,6 +41,16 @@ const styles = (theme) => ({
       minWidth: 190,
       maxWidth: 300,
     },
+    pickerInstructons: {
+      color: 'black',
+      // color: '#f5deb3',
+      textAlign: 'center',
+      backgroundColor: '#a9a9a9',
+      borderRadius: 5,
+      opacity: '80%',
+      width: '60%',
+      margin: 'auto',
+    }
   });
 
 class TimePicker extends Component {
@@ -50,28 +59,26 @@ class TimePicker extends Component {
     return (
       <div>
           <form>
-            <h2>Please choose a time</h2>
-            <Grid item xs={6} className={classes.gridItem}>
+            <h2 className={classes.pickerInstructons}>Please choose a time</h2>
                 <Paper className={classes.paper}>
-                <div>
+                  <div>
                     <FormControl className={classes.formControl}>
-                    <InputLabel>Available Times</InputLabel>
+                      <InputLabel>Available Times</InputLabel>
                         <Select
-                            value={this.props.state.apt_id}
-                            // pass in event and input property for handleChange
-                            onChange={(event) => this.props.setTime(event)}
-                            >
-                                {/* map appointment slots to populate the dropdown */}
-                            {this.props.store.aptSlots.map((slot, i) => {
-                              return(
-                                <MenuItem key={i} value={slot.id}>{slot.start_time}</MenuItem>
-                                )
-                            })}
+                          value={this.props.state.apt_id}
+                          // pass in event and input property for handleChange
+                          onChange={(event) => this.props.setTime(event)}
+                          >
+                              {/* map appointment slots to populate the dropdown */}
+                          {this.props.store.aptSlots.map((slot, i) => {
+                            return(
+                              <MenuItem key={i} value={slot.id}>{slot.start_time}</MenuItem>
+                              )
+                          })}
                         </Select>
                     </FormControl>
-                    </div>
+                  </div>
                 </Paper>
-            </Grid>
         </form>
       </div>
     );

@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import BarberPicker from '../BarberPicker/BarberPicker';
 import DisableSelectBtn from '../DisableSelectBtn/DisableSelectBtn';
+import swal from 'sweetalert';
 
 const styles = (theme) => ({
   root: {
@@ -16,18 +17,13 @@ const styles = (theme) => ({
   },
   button: {
     margin: theme.spacing.unit,
-  },
-  leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
-  iconSmall: {
-    fontSize: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   gridItem: {
     flexBasis: 0,
+    marginTop: '10px',
+    marginBottom: '10px'
   },
   paper: {
     padding: theme.spacing.unit * 1,
@@ -60,6 +56,33 @@ const styles = (theme) => ({
     minWidth: 190,
     maxWidth: 300,
   },
+  aptDetailHead: {
+    color: 'black',
+    textAlign: 'center',
+    backgroundColor: '#a9a9a9',
+    borderRadius: 5,
+    opacity: '80%',
+    width: '60%',
+    margin: 'auto',
+    marginTop: '10px',
+    marginBottom: '10px'
+  },
+  pickerInstructons: {
+    color: 'black',
+    textAlign: 'center',
+    backgroundColor: '#a9a9a9',
+    borderRadius: 5,
+    opacity: '80%',
+    width: '60%',
+    margin: 'auto',
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
+  selectBtn: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
+  }
 });
 
 class SchedulingOptions extends Component {
@@ -106,27 +129,54 @@ class SchedulingOptions extends Component {
   chooseApt = () => {
     if (this.state.date !== '' && this.state.apt_id !== ''
         && this.state.barber !== '' && this.state.dotw !== '') {
-          this.props.dispatch({type: 'ADD_APPOINTMENT', 
-                payload: this.state})
-          this.setState({clicked: true})
-          this.props.history.push(`/confirm/${this.props.store.user.id}`)
-        }
-        else {
-          alert('Please fill out all fields to proceed to appointment confirmation')
+          swal({
+            title: "Almost Done!",
+            text: "This will confirm and book your appointment, is that ok?",
+            icon: "info",
+            buttons: ["Not yet", "Book it!"]
+          })
+          .then((confirm) =>{
+            if(confirm) {
+              return(
+              this.props.dispatch({type: 'ADD_APPOINTMENT', 
+                    payload: this.state}),
+              this.setState({clicked: true}),
+              this.props.history.push(`/confirm/${this.props.store.user.id}`)
+              )
+            }
+            else {
+              console.log('User isnt ready')
+            }
+          })
         }
   }
 
   handleBack = (event) => {
-    this.props.history.push('/user')
+    swal({
+      title: "Are you sure?",
+      text: "If you go back now, this appointment won't be saved",
+      icon: "warning",
+      buttons: ["Nope", "Go back"]
+    })
+    .then((goBack) => {
+      if(goBack) {
+        this.props.history.push('/user')
+      }
+      else {
+        console.log('User doesnt want to go back yet')
+      }
+    })
   }
 
   render() {
     const { classes } = this.props;
     return (
     <div>
-      <h2>Please schedule your appointment below</h2>
-      <h3>Choose Your Appointment Details</h3>
-          <div className={classes.root}>
+      <div className={classes.aptDetailHead}>
+        <h2>Please schedule your appointment below</h2>
+        <h3>Choose Your Appointment Details</h3>
+      </div>
+        <div className={classes.root}>
             
             {/* Date Picker */}
             <Grid container spacing={2}
@@ -150,33 +200,37 @@ class SchedulingOptions extends Component {
             </Grid>
           </div>
         {this.state.date !== '' ? <BarberPicker state={this.state} 
-         setBarber={this.setBarber} setTime={this.setTime}/> : <p>Please choose a date</p>}
-  
+         setBarber={this.setBarber} setTime={this.setTime}/> : 
+         <p className={classes.pickerInstructons}>Please choose a date</p>}
+        
         {this.state.apt_id !== '' && this.state.clicked === false ? 
+            <div>
+              <p className={classes.pickerInstructons}>
+                Click Book Appointment to reserve your spot!</p>
+              <div className={classes.selectBtn}>
+              <Button 
+                name="selectAppointment"
+                id="selectBtn"
+                onClick={(event) => this.chooseApt(event)}
+                color="primary"
+                variant="contained" 
+                size="large" 
+                className={classes.button}>
+                  Book Appointment
+              </Button>
+              </div>
+            </div> : 
+            <DisableSelectBtn />}
           <div>
-            <p>Click this button to book your appointment then press Continue</p>
             <Button 
-              name="selectAppointment"
-              id="selectBtn"
-              onClick={(event) => this.chooseApt(event)}
+              onClick={(event) => this.handleBack(event)}
               color="primary"
               variant="contained" 
               size="large" 
               className={classes.button}>
-                Select Appointment
+              Back
             </Button>
-          </div> : 
-          <DisableSelectBtn />}
-        <div>
-          <Button 
-            onClick={(event) => this.handleBack(event)}
-            color="primary"
-            variant="contained" 
-            size="large" 
-            className={classes.button}>
-            Back
-          </Button>
-        </div>
+          </div>
       </div>
     );
   }

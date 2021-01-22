@@ -57,7 +57,6 @@ const styles = (theme) => ({
   },
   userGreetings: {
     color: 'black',
-    // color: '#f5deb3',
     textAlign: 'center',
     backgroundColor: '#a9a9a9',
     borderRadius: 5,
