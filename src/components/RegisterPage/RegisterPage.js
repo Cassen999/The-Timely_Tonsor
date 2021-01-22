@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+
+const styles = (theme) => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 class RegisterPage extends Component {
   state = {
@@ -12,24 +20,27 @@ class RegisterPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <RegisterForm />
 
         <center>
-          <button
+          <Button
             type="button"
-            className="btn btn_asLink"
+            color="primary"
+            variant="contained"
+            className={classes.button}
             onClick={() => {
               this.props.history.push('/login');
             }}
           >
             Login
-          </button>
+          </Button>
         </center>
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(RegisterPage);
+export default withStyles(styles)(connect(mapStoreToProps)(RegisterPage));
