@@ -15,7 +15,8 @@ const {
                       JOIN "user_appointment" AS UA ON 
                       UA."appt_id" = "AS".id 
                       JOIN "user" AS "U" ON UA."user_id" = "U".id 
-                      WHERE barber_id = $1 AND UA.date = $2;`
+                      WHERE barber_id = $1 AND UA.date = $2
+                      ORDER BY "AS"."start_time" ASC;`
     pool.query(sqlText, [id, date])
     .then((result) => {
       res.send(result.rows)
