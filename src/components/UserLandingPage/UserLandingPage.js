@@ -61,7 +61,9 @@ const styles = (theme) => ({
     textAlign: 'center',
     backgroundColor: '#a9a9a9',
     borderRadius: 5,
-    opacity: '80%'
+    opacity: '80%',
+    width: '60%',
+    margin: 'auto',
   },
   welcome: {
     position: 'relative'
@@ -110,9 +112,9 @@ class UserLandingPage extends Component {
         <div className={classes.userGreetings}>
           <h1 className={classes.welcome}>Welcome, {this.props.store.user.first_name}!</h1>
           <p className={classes.welcome}>From here, you can edit any profile information, or click the 
-            Schedule Appointment button to schedule an appointment</p>
+            Make Appointment button to schedule an appointment.</p>
           <p className={classes.welcome}>To edit your profile information, just type into the corresponding
-            field and press Update to update that information
+            field and press Save to update that information.
           </p>
           </div>
         <form onSubmit={this.handleUserUpdate}>

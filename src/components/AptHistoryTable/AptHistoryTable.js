@@ -49,7 +49,7 @@ const styles = theme => ({
       textAlign: 'center',
       backgroundColor: '#a9a9a9',
       borderRadius: 5,
-      opacity: '85%'
+      opacity: '85%',
     }
   });
 
