@@ -60,9 +60,6 @@ const styles = (theme) => ({
     minWidth: 190,
     maxWidth: 300,
   },
-  selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
-  },
 });
 
 class SchedulingOptions extends Component {

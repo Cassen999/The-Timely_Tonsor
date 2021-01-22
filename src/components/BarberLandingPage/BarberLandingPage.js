@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LogoutButtonStyled from '../LogOutButtonStyled/LogOutButtonStyled';
+import './BarberLandingPage.css';
 
 const styles = theme => ({
     root: {
@@ -36,9 +37,6 @@ const styles = theme => ({
     },
     iconSmall: {
       fontSize: 20,
-    },
-    deleteBtn: {
-      justifyContent: 'center'
     },
   });
 
@@ -74,8 +72,8 @@ class BarberLandingPage extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <h2>Welcome {this.props.store.user.first_name}</h2>
-        <h3>Choose a date to view schedule</h3>
+        <h2 className="welcome">Welcome {this.props.store.user.first_name}</h2>
+        <h3 className="chooseDate">Choose a date to view schedule</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className="schedPicker">
             <Paper className={classes.root}>
@@ -127,7 +125,9 @@ class BarberLandingPage extends Component {
                 </TableBody>
             </Table>
         </Paper>
-        <LogoutButtonStyled />
+        <div className="logoutBtn">
+          <LogoutButtonStyled />
+        </div>
       </div>
     );
   }

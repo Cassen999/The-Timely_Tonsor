@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { BorderAllRounded } from '@material-ui/icons';
 
 
 const styles = theme => ({
@@ -21,7 +22,8 @@ const styles = theme => ({
       float: 'center'
     },
     table: {
-      minWidth: 700
+      minWidth: 700,
+      width: 1200
     },
     container: {
       display: 'flex',
@@ -41,6 +43,13 @@ const styles = theme => ({
     },
     deleteBtn: {
       justifyContent: 'center'
+    },
+    head: {
+      color: 'black',
+      textAlign: 'center',
+      backgroundColor: '#a9a9a9',
+      borderRadius: 5,
+      opacity: '85%'
     }
   });
 
@@ -67,7 +76,7 @@ class AptHistoryTable extends Component {
     };
     return (
       <div>
-        <h2>Appointment History and Future Appointments</h2>
+        <h2 className={classes.head}>Appointment History and Future Appointments</h2>
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>

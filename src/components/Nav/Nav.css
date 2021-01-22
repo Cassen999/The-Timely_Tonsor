@@ -10,6 +10,8 @@
   margin: 0 0 30px;
   background-color: black;
   overflow: hidden;
+  opacity: 85%;
+  border-radius: 5px;
 }
 
 .nav-link {

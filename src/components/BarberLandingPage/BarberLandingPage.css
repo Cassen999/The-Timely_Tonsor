@@ -1,0 +1,19 @@
+.logoutBtn {
+    margin: 1rem;
+}
+
+.welcome {
+    color: rgb(20, 20, 20);
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.chooseDate {
+    color: rgb(20, 20, 20);
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}

@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import AptHistoryTable from '../AptHistoryTable/AptHistoryTable';
+import './UserLandingPage';
 
 const styles = (theme) => ({
   root: {
@@ -51,7 +52,24 @@ const styles = (theme) => ({
     width: 200,
   },
   buttonContainer: {
-    float: 'right'
+    display: 'flex',
+    justifyContent: 'space-around'
+  },
+  userGreetings: {
+    color: 'black',
+    // color: '#f5deb3',
+    textAlign: 'center',
+    backgroundColor: '#a9a9a9',
+    borderRadius: 5,
+    opacity: '80%'
+  },
+  welcome: {
+    position: 'relative'
+  },
+  aptTable: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
@@ -89,14 +107,14 @@ class UserLandingPage extends Component {
     const classes = this.props.classes;
     return (
       <div>
-        <div>
-          <h1 id="welcome">Welcome, {this.props.store.user.first_name}!</h1>
-          <p>From here, you can edit any profile information, or click the 
+        <div className={classes.userGreetings}>
+          <h1 className={classes.welcome}>Welcome, {this.props.store.user.first_name}!</h1>
+          <p className={classes.welcome}>From here, you can edit any profile information, or click the 
             Schedule Appointment button to schedule an appointment</p>
-          <p>To edit your profile information, just type into the corresponding
+          <p className={classes.welcome}>To edit your profile information, just type into the corresponding
             field and press Update to update that information
           </p>
-        </div>
+          </div>
         <form onSubmit={this.handleUserUpdate}>
         <div className={classes.root}>
           <Grid container spacing={6}
@@ -153,6 +171,15 @@ class UserLandingPage extends Component {
           </Grid>
         </div>
         <div className={classes.buttonContainer}>
+          <LogOutButtonStyled className={classes.logout} />
+          <Button 
+            onClick={(event) => this.handleRedirectScheduler(event, this.props.store.user.id)}
+            color="primary"
+            variant="contained" 
+            size="large" 
+            className={classes.button}>
+            Make an Appointment
+          </Button>
           <Button 
             color="primary"
             type="submit"
@@ -165,20 +192,7 @@ class UserLandingPage extends Component {
           </Button>
         </div>
         </form>
-        <div>
-          <LogOutButtonStyled className="log-in" />
-        </div>
-        <div>
-          <Button 
-            onClick={(event) => this.handleRedirectScheduler(event, this.props.store.user.id)}
-            color="primary"
-            variant="contained" 
-            size="large" 
-            className={classes.button}>
-            Make an Appointment
-          </Button>
-        </div>
-        <div className="aptTable">
+        <div className={classes.aptTable}>
           <AptHistoryTable />
         </div>
       </div>
