@@ -38,6 +38,11 @@ const styles = theme => ({
     iconSmall: {
       fontSize: 20,
     },
+    schedPicker: {
+      margin: 'auto',
+      justifyContent: 'center',
+      display: 'flex'
+      }
   });
 
   const handleDate = (date) => {
@@ -75,7 +80,7 @@ class BarberLandingPage extends Component {
         <h2 className="welcome">Welcome {this.props.store.user.first_name}</h2>
         <h3 className="chooseDate">Choose a date to view schedule</h3>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
-          <div className="schedPicker">
+          <div className={classes.schedPicker}>
             <Paper className={classes.root}>
               <TextField
                 id="date"
