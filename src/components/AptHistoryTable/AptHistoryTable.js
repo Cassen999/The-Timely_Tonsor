@@ -43,11 +43,8 @@ const styles = theme => ({
       justifyContent: 'center'
     },
     head: {
-      color: 'black',
+      color: 'white',
       textAlign: 'center',
-      backgroundColor: '#a9a9a9',
-      borderRadius: 5,
-      opacity: '85%',
     }
   });
 

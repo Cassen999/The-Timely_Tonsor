@@ -1,13 +1,3 @@
-.aptTable {
-    color: wheat;
-}
-
-.userGreetings {
-    color: #f5deb3;
-    background-color: black;
-}
-
-#welcome {
-    color: wheat;
-    background-color: black;
+.MuiGrid-container {
+    flex-wrap: nowrap;
 }

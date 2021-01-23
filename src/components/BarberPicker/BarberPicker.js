@@ -20,10 +20,6 @@ const styles = (theme) => ({
       marginTop: '10px',
       marginBottom: '10px'
     },
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
     dense: {
       marginTop: 19,
     },
@@ -31,16 +27,6 @@ const styles = (theme) => ({
       minWidth: 190,
       maxWidth: 300,
     },
-    pickerInstructons: {
-      color: 'black',
-      // color: '#f5deb3',
-      textAlign: 'center',
-      backgroundColor: '#a9a9a9',
-      borderRadius: 5,
-      opacity: '80%',
-      width: '60%',
-      margin: 'auto',
-    }
   });
 
 class BarberPicker extends Component {
@@ -53,7 +39,7 @@ class BarberPicker extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <h2 className={classes.pickerInstructons}>Choose a Barber</h2>
+        <h2 className="scrim">Choose a Barber</h2>
             <Paper className={classes.paper}>
             <div>
                 <FormControl className={classes.formControl}>

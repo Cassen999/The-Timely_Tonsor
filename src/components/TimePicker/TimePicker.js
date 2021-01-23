@@ -41,16 +41,6 @@ const styles = (theme) => ({
       minWidth: 190,
       maxWidth: 300,
     },
-    pickerInstructons: {
-      color: 'black',
-      // color: '#f5deb3',
-      textAlign: 'center',
-      backgroundColor: '#a9a9a9',
-      borderRadius: 5,
-      opacity: '80%',
-      width: '60%',
-      margin: 'auto',
-    }
   });
 
 class TimePicker extends Component {
@@ -59,7 +49,7 @@ class TimePicker extends Component {
     return (
       <div>
           <form>
-            <h2 className={classes.pickerInstructons}>Please choose a time</h2>
+            <h2 className="scrim">Please choose a time</h2>
                 <Paper className={classes.paper}>
                   <div>
                     <FormControl className={classes.formControl}>

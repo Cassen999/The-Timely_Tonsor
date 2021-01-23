@@ -10,6 +10,7 @@ import moment from 'moment';
 import BarberPicker from '../BarberPicker/BarberPicker';
 import DisableSelectBtn from '../DisableSelectBtn/DisableSelectBtn';
 import swal from 'sweetalert';
+import './SchedulingOptions.css'
 
 const styles = (theme) => ({
   root: {
@@ -171,65 +172,67 @@ class SchedulingOptions extends Component {
   render() {
     const { classes } = this.props;
     return (
-    <div>
-      <div className={classes.aptDetailHead}>
-        <h2>Please schedule your appointment below</h2>
-        <h3>Choose Your Appointment Details</h3>
-      </div>
-        <div className={classes.root}>
-            
-            {/* Date Picker */}
-            <Grid container spacing={2}
-              alignItems="center"
-              justify="center">
-              <Grid item xs={6} className={classes.gridItem}>
-                <Paper className={classes.paper}>
-                  <TextField
-                    id="date"
-                    label="Select a Date"
-                    type="date"
-                    value={this.state.date}
-                    onChange={this.handleInputChangeForDate}
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </Paper>
+    <div className="container">
+      <div className="panel">
+        <div className="scrim">
+          <h2>Please schedule your appointment below</h2>
+          <h3>Choose Your Appointment Details</h3>
+        </div>
+          <div className={classes.root}>
+              
+              {/* Date Picker */}
+              <Grid container spacing={2}
+                alignItems="center"
+                justify="center">
+                <Grid item xs={6} className={classes.gridItem}>
+                  <Paper className={classes.paper}>
+                    <TextField
+                      id="date"
+                      label="Select a Date"
+                      type="date"
+                      value={this.state.date}
+                      onChange={this.handleInputChangeForDate}
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Paper>
+                </Grid>
               </Grid>
-            </Grid>
-          </div>
-        {this.state.date !== '' ? <BarberPicker state={this.state} 
-         setBarber={this.setBarber} setTime={this.setTime}/> : 
-         <p className={classes.pickerInstructons}>Please choose a date</p>}
-        
-        {this.state.apt_id !== '' && this.state.clicked === false ? 
+            </div>
+          {this.state.date !== '' ? <BarberPicker state={this.state} 
+          setBarber={this.setBarber} setTime={this.setTime}/> : 
+          <p className="scrim">Please choose a date</p>}
+          
+          {this.state.apt_id !== '' && this.state.clicked === false ? 
+              <div>
+                <p className="scrim">
+                  Click Book Appointment to reserve your spot!</p>
+                <div className={classes.selectBtn}>
+                <Button 
+                  name="selectAppointment"
+                  id="selectBtn"
+                  onClick={(event) => this.chooseApt(event)}
+                  color="primary"
+                  variant="contained" 
+                  size="large" 
+                  className={classes.button}>
+                    Book Appointment
+                </Button>
+                </div>
+              </div> : 
+              <DisableSelectBtn />}
             <div>
-              <p className={classes.pickerInstructons}>
-                Click Book Appointment to reserve your spot!</p>
-              <div className={classes.selectBtn}>
               <Button 
-                name="selectAppointment"
-                id="selectBtn"
-                onClick={(event) => this.chooseApt(event)}
+                onClick={(event) => this.handleBack(event)}
                 color="primary"
                 variant="contained" 
                 size="large" 
                 className={classes.button}>
-                  Book Appointment
+                Back
               </Button>
-              </div>
-            </div> : 
-            <DisableSelectBtn />}
-          <div>
-            <Button 
-              onClick={(event) => this.handleBack(event)}
-              color="primary"
-              variant="contained" 
-              size="large" 
-              className={classes.button}>
-              Back
-            </Button>
+            </div>
           </div>
       </div>
     );
