@@ -14,9 +14,7 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 // import ProtectedRouteBarber from '../ProtectedRoute/ProtectedRouteBarber';
 
-import AboutPage from '../AboutPage/AboutPage';
 import UserLandingPage from '../UserLandingPage/UserLandingPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import SchedulingOptions from '../SchedulingOptions/SchedulingOptions';
@@ -40,14 +38,6 @@ class App extends Component {
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
 
-            {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
-              // shows AboutPage at all times (logged in or not)
-              exact
-              path="/about"
-              component={AboutPage}
-            />
-
             {this.props.store.user.is_barber === true ? <>
             
             <ProtectedRoute
@@ -62,14 +52,6 @@ class App extends Component {
               exact
               path="/user"
               component={UserLandingPage}
-            />
-
-            <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-              component={InfoPage}
-              authRedirect="/barber"
             />
 
             <ProtectedRoute
@@ -131,13 +113,6 @@ class App extends Component {
               exact
               path="/home"
               component={UserLandingPage}
-            />
-
-            <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-              component={InfoPage}
             />
 
             <ProtectedRoute
