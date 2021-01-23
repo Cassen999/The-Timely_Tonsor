@@ -51,7 +51,7 @@ const styles = theme => ({
     width: '70%',
     justifyContent: 'center',
     margin: 'auto',
-    marginTop: 5
+    marginTop: 20
   },
 });
 
@@ -96,14 +96,14 @@ class RegisterForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <form className="formPanel" onSubmit={this.registerUser}>
-        <h2 className="formPanelTitle">Register User</h2>
+      <form className="formPanel register" onSubmit={this.registerUser}>
+        <h2 className="registerTitle">Register User</h2>
         {this.props.store.errors.registrationMessage && (
           <h3 className="alert" role="alert">
             {this.props.store.errors.registrationMessage}
           </h3>
         )}
-        <div>
+        <div className="fields">
             <TextField
               required
               label="Desired Username"
@@ -113,7 +113,7 @@ class RegisterForm extends Component {
               margin="normal"
             />
         </div>
-        <div>
+        <div className="fields password">
           <Input
               required
               type={this.state.showPassword ? 'text' : 'password'}
@@ -132,7 +132,7 @@ class RegisterForm extends Component {
                   }
             />
         </div>
-        <div>
+        <div className="fields">
           <TextField
             required
             label="First Name"
@@ -142,7 +142,7 @@ class RegisterForm extends Component {
             margin="normal"
           />
         </div>
-        <div>
+        <div className="fields">
           <TextField
             required
             label="Last Name"
@@ -152,7 +152,7 @@ class RegisterForm extends Component {
             margin="normal"
           />
         </div>
-        <div>
+        <div className="fields">
         <TextField
             required
             label="Phone 5555555555"
@@ -172,7 +172,7 @@ class RegisterForm extends Component {
             <MenuItem value={false}>Client</MenuItem>
           </Select>
         </div>
-        <div className={classes.submitForm}>
+        <div className="registerBtn">
           <Button 
             type="submit"
             variant="contained" 

@@ -109,10 +109,29 @@ Form Treatment
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
-  /* justify-content: center; */
 }
 
-input {
+.fields {
+  justify-content: center;
+  display: flex;
+}
+
+.password {
+  margin-top: 1.5em;
+}
+
+.input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+.registerBtn {
+  justify-content: center;
+  display: flex;
+  margin-top: 1em;
+}
+
+.registerTitle {
+  text-align: center;
+  
 }
