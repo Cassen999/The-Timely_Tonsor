@@ -115,7 +115,7 @@ class UserLandingPage extends Component {
           <p className={classes.welcome}>To edit your profile information, just type into the corresponding
             field and press Save to update that information.
           </p>
-          </div>
+        </div>
         <form onSubmit={this.handleUserUpdate}>
         <div className={classes.root}>
           <Grid container spacing={6}

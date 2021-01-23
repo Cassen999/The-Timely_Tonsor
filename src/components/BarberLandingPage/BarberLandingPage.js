@@ -76,9 +76,12 @@ class BarberLandingPage extends Component {
     };
     const { classes } = this.props;
     return (
-      <div>
-        <h2 className="welcome">Welcome {this.props.store.user.first_name}</h2>
-        <h3 className="chooseDate">Choose a date to view schedule</h3>
+      <div className="container">
+        <div className="panel">
+          <div className="scrim">
+            <h2>Welcome {this.props.store.user.first_name}</h2>
+            <h3>Choose a date to view schedule</h3>
+          </div>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.schedPicker}>
             <Paper className={classes.root}>
@@ -132,6 +135,7 @@ class BarberLandingPage extends Component {
         </Paper>
         <div className="logoutBtn">
           <LogoutButtonStyled />
+        </div>
         </div>
       </div>
     );
