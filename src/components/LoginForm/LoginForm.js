@@ -81,13 +81,13 @@ class LoginForm extends Component {
 
     return (
       <form className="formPanel" onSubmit={this.login}>
-        <h2 className="formPanelTitle">Login</h2>
+        <h2 className="formPanelTitle registerTitle">Login</h2>
         {this.props.store.errors.loginMessage && (
           <h3 className="alert" role="alert">
             {this.props.store.errors.loginMessage}
           </h3>
         )}
-          <div>
+          <div className="fields">
             <TextField
               required
               placeholder="Username"
@@ -97,7 +97,7 @@ class LoginForm extends Component {
               margin="normal"
             />
         </div>
-        <div>
+        <div className="fields password">
           <Input
             required
             type={this.state.showPassword ? 'text' : 'password'}
@@ -117,7 +117,7 @@ class LoginForm extends Component {
             }
           />
         </div>
-        <div>
+        <div className="registerBtn">
           <Button variant="contained" 
             type="submit"
             color="primary" 
