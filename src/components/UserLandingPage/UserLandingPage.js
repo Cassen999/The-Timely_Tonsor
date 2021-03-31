@@ -103,6 +103,10 @@ class UserLandingPage extends Component {
             <p>To edit your profile information, just type into the corresponding
               field and press Save to update that information.
             </p>
+            <p>To cancel an appointment it must be at least one calendar day 
+              in the future. Please call the shop at 555-555-5555 to make 
+              same-day cancellations.
+            </p>
           </div>
           <form onSubmit={this.handleUserUpdate}>
           <div className={classes.root}>

@@ -69,6 +69,10 @@ class BarberLandingPage extends Component {
       barberId: this.props.store.user.id}})
     console.log('handle delete event', appt_id)
   }
+
+  aptDetailClick = (apt_id) => {
+    this.props.history.push("/barberAptView")
+  }
     
   render() {
     const isDateAfterToday = (date) => {
@@ -111,7 +115,9 @@ class BarberLandingPage extends Component {
                 <TableBody>
                     {this.props.store.barberApt.map((apt, i) => {
                       return( 
-                        <TableRow key={i}>
+                        // On click to detailed view goes on the table row
+                        <TableRow key={i}
+                          onClick={() => this.aptDetailClick(apt.id)}>
                           <TableCell align="right">{handleDate(apt.date)}</TableCell>
                           <TableCell align="right">{apt.start_time}</TableCell>
                           <TableCell align="right">{apt.first_name}</TableCell>

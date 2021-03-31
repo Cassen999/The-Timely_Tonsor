@@ -22,6 +22,7 @@ import BarberLandingPage from '../BarberLandingPage/BarberLandingPage';
 import AptConfirmation from '../AptConfirmation/AptConfirmation';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './App.css';
+import BarberAptView from '../BarberAptView/BarberAptView';
 
 class App extends Component {
   componentDidMount() {
@@ -48,10 +49,20 @@ class App extends Component {
             />
 
             <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows RegisterPage at "/registration"
+              exact
+              path="/barberAptView"
+              component={BarberAptView}
+            />
+
+            <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
               component={UserLandingPage}
+              authRedirect = "/barber"
             />
 
             <ProtectedRoute
@@ -97,7 +108,6 @@ class App extends Component {
               exact
               path="/home"
               component={BarberLandingPage}
-              authRedirect="/barber"
             />
 
             </>: <>
