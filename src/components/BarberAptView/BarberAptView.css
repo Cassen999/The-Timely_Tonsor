@@ -1,0 +1,25 @@
+.container {
+  color: rgb(179, 178, 178);
+}
+
+.grid {
+  display: flex;
+  flex: 0 1 auto;
+  /* defaults to 'row' */
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* defaults to 'flex-start' */
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.grid-col {
+  flex: 0 0 auto;
+  padding: 0 0.5rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.grid-col_8 {
+  flex-basis: 66.66666667%;
+  max-width: 66.66666667%;
+}

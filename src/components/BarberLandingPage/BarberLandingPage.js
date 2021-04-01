@@ -52,6 +52,7 @@ const styles = theme => ({
 class BarberLandingPage extends Component {
 
   componentDidMount() {
+    // Fetches current date on mount and displays on apt table
     let today = new Date()
     let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     this.props.dispatch({type: 'FETCH_BARBER_APT', 
