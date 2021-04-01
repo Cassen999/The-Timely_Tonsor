@@ -51,6 +51,14 @@ const styles = theme => ({
 
 class BarberLandingPage extends Component {
 
+  componentDidMount() {
+    let today = new Date()
+    let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    this.props.dispatch({type: 'FETCH_BARBER_APT', 
+      payload: {id: this.props.store.user.id, date: date}})
+    console.log(date)
+  }
+
   state = {
     date: ''
   }
@@ -61,7 +69,6 @@ class BarberLandingPage extends Component {
     });
     this.props.dispatch({type: 'FETCH_BARBER_APT', 
       payload: {id: this.props.store.user.id, date: event.target.value}})
-    console.log('in SelectDate id then date', this.props.store.user.id, event.target.value)
   }
 
   handleDelete = (appt_id, id, date) => {
