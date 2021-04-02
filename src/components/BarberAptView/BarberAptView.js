@@ -7,7 +7,7 @@ function BarberAptView(props) {
 
   const [heading, setHeading] = useState('Appointment Details');
 
-  const appointment = props.store.barberApt[0]
+  const appointment = props.store.barberApt
 
   const handleDate = (date) => {
     return (date = new Date(date).toDateString());
@@ -17,7 +17,7 @@ function BarberAptView(props) {
     const p = phone
     return(
       `+1(${p[0]}${p[1]}${p[2]})-${p[3]}${p[4]}${p[5]}
-        -${p[6]}${p[7]}${p[8]}${p[9]}`
+      -${p[6]}${p[7]}${p[8]}${p[9]}`
     )
   }
 
@@ -30,13 +30,13 @@ function BarberAptView(props) {
             <h6>
               {appointment.first_name} {appointment.last_name}
             </h6>
-            <h6>
+            {/* <h6>
               {handlePhone(appointment.phone_number)}
             </h6>
             <h6>
               {handleDate(appointment.date)}
               {appointment.start_time}
-            </h6>
+            </h6> */}
           </div>
         </div>
         </div>

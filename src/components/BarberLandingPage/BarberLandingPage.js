@@ -78,7 +78,9 @@ class BarberLandingPage extends Component {
     console.log('handle delete event', appt_id)
   }
 
-  aptDetailClick = (apt_id) => {
+  aptDetailClick = (aptSlot_id) => {
+    console.log('aptSlot_id barberlandingpage', aptSlot_id)
+    this.props.dispatch({type: 'FETCH_APT_DETAILS', payload: aptSlot_id})
     this.props.history.push("/barberAptView")
   }
     
@@ -125,7 +127,7 @@ class BarberLandingPage extends Component {
                       return( 
                         // On click to detailed view goes on the table row
                         <TableRow key={i}
-                          onClick={() => this.aptDetailClick(apt.id)}
+                          onClick={() => this.aptDetailClick(apt.appt_id)}
                           className="clickable">
                           <TableCell align="right">{handleDate(apt.date)}</TableCell>
                           <TableCell align="right">{apt.start_time}</TableCell>

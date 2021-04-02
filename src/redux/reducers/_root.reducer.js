@@ -6,6 +6,7 @@ import aptSlots from './aptSlot.reducer';
 import barbers from './barber.reducer';
 import addApt from './addApt.reducer';
 import history from './history.reducer';
+import aptDetails from './aptDetails.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   aptSlots,
   barbers,
   addApt,
-  history
+  history,
+  aptDetails,
 });
 
 export default rootReducer;

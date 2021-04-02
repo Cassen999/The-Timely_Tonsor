@@ -3,7 +3,6 @@ const appointmentReducer = (state = [], action) => {
     const initialState = []
     switch (action.type) {
       case 'SET_BARBER_APT':
-        console.log('barberAptReducer action.payload', action.payload)
         return action.payload;
       case 'UNSET_BARBER_APT':
         return [];
