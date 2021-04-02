@@ -1,4 +1,4 @@
-const appointmentReducer = (state = [], action) => {
+const appointmentReducer = (state = {}, action) => {
     const newData = Object.entries(state)
     const initialState = []
     switch (action.type) {

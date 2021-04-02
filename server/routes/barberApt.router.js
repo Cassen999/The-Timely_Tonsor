@@ -32,7 +32,7 @@ const {
     // let user_id = req.query.user_id
     const sqlText = `SELECT "UA".id, "UA".user_id, "user".first_name, 
                       "user".last_name, "user".phone_number, 
-                      "AS".dotw, "AS".start_time
+                      "AS".dotw, "AS".start_time, "UA".date
                       FROM "user_appointment" AS "UA"
                       JOIN "user" ON "user".id = "UA".user_id
                       JOIN "appointment_slots" AS "AS" ON "AS".id = "UA".appt_id
