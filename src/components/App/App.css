@@ -134,3 +134,8 @@ Form Treatment
 .registerTitle {
   text-align: center;
 }
+
+/* Reusable class to turn cursor into a pointer on clickable objects */
+.clickable {
+  cursor: pointer;
+}

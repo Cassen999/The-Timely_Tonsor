@@ -125,7 +125,8 @@ class BarberLandingPage extends Component {
                       return( 
                         // On click to detailed view goes on the table row
                         <TableRow key={i}
-                          onClick={() => this.aptDetailClick(apt.id)}>
+                          onClick={() => this.aptDetailClick(apt.id)}
+                          className="clickable">
                           <TableCell align="right">{handleDate(apt.date)}</TableCell>
                           <TableCell align="right">{apt.start_time}</TableCell>
                           <TableCell align="right">{apt.first_name}</TableCell>
