@@ -26,6 +26,17 @@ function* fetchAptDetails(action) {
   }
 }
 
+function* updateClientNotes(action) {
+  try {
+    console.log('Update client notes action.payload', action.payload)
+    yield axios.put(`/api/barberApt/id`, action.payload)
+    yield put{(type: 'SET_NEW_NOTE', payload:response.data)};
+  }
+  catch(error) {
+    console.log('Update saga error', error)
+  }
+}
+
 function* appointmentSaga() {
     yield takeLatest('FETCH_BARBER_APT', fetchBarberApt);
     yield takeLatest('FETCH_APT_DETAILS', fetchAptDetails);

@@ -5,6 +5,7 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
+  // Used to get logged in barber's scheduled appointments
   router.get('/', rejectUnauthenticated, (req, res) => {
     let id = req.query.id
     let date = req.query.date
@@ -26,6 +27,7 @@ const {
     })
   });
 
+  // Used when a barber clicks an appointment on their schedule
   router.get('/aptDetails', rejectUnauthenticated, (req, res) => {
     let aptSlot_id = Number(req.query.aptSlot_id)
     console.log(aptSlot_id)
@@ -47,6 +49,24 @@ const {
       res.sendStatus(500)
     })
   });
+
+  // Used to edit a customer's notes
+  router.put('/notes/id', (req,res) => {
+    console.log('In router.put')
+    const id = req.body.user_id;
+    const notes = req.body.notes
+    console.log('params', req.body, id)
+    const sqlText = `UPDATE "user" SET notes=${notes} WHERE id=${id} 
+      RETURNING notes`
+    pool.query(sqlText, [notes, id])
+    .then((result) => {
+      res.send(result.rows)
+    })
+    .catch((error) => {
+      console.log('Error in router.post', error)
+      res.sendStatus(500)
+    })
+  })
 
 
 module.exports = router;
