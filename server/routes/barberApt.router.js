@@ -31,7 +31,6 @@ const {
   router.get('/aptDetails', rejectUnauthenticated, (req, res) => {
     let aptSlot_id = Number(req.query.aptSlot_id)
     console.log(aptSlot_id)
-    // let user_id = req.query.user_id
     const sqlText = `SELECT "UA".id, "UA".user_id, "user".first_name, 
                       "user".last_name, "user".phone_number, "user".notes,
                       "AS".dotw, "AS".start_time, "UA".date
@@ -51,14 +50,13 @@ const {
   });
 
   // Used to edit a customer's notes
-  router.put('/notes/id', (req,res) => {
+  router.put('/notes', (req,res) => {
     console.log('In router.put')
     const id = req.body.user_id;
     const notes = req.body.notes
-    console.log('params', req.body, id)
-    const sqlText = `UPDATE "user" SET notes=${notes} WHERE id=${id} 
-      RETURNING notes`
-    pool.query(sqlText, [notes, id])
+    const sqlText = `UPDATE "user" SET notes=$1 WHERE id=${id} 
+      RETURNING notes;`
+    pool.query(sqlText, [notes])
     .then((result) => {
       res.send(result.rows)
     })

@@ -18,7 +18,6 @@ function* fetchAptDetails(action) {
   console.log(aptSlot_id)
   try {
       const response = yield axios.get(`/api/barberApt/aptDetails?aptSlot_id=${aptSlot_id}`)
-      console.log('fetchaptdetails response.data', response.data)
       yield put({type: 'SET_APT_DETAILS', payload: response.data})
   }
   catch (error) {
@@ -27,10 +26,10 @@ function* fetchAptDetails(action) {
 }
 
 function* updateClientNotes(action) {
+  console.log('updateClientNotes action.payload', action.payload)
   try {
     console.log('Update client notes action.payload', action.payload)
-    yield axios.put(`/api/barberApt/id`, action.payload)
-    yield put{(type: 'SET_NEW_NOTE', payload:response.data)};
+    yield axios.put(`/api/barberApt/notes`, action.payload)
   }
   catch(error) {
     console.log('Update saga error', error)
@@ -40,6 +39,7 @@ function* updateClientNotes(action) {
 function* appointmentSaga() {
     yield takeLatest('FETCH_BARBER_APT', fetchBarberApt);
     yield takeLatest('FETCH_APT_DETAILS', fetchAptDetails);
+    yield takeLatest('UPDATE_NOTE', updateClientNotes);
 }
 
 export default appointmentSaga

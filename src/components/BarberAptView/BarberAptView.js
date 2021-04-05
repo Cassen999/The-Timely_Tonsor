@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './BarberAptView.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,10 +8,10 @@ import TextField from '@material-ui/core/TextField';
 export function BarberAptView(props) {
 
   const [heading, setHeading] = useState('Appointment Details');
-  // Research how to set the state using the input for client notes
-  const [note, setNote] = useState();
 
   const appointment = props.store.aptDetails
+
+  const dispatch = useDispatch();
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,8 +36,9 @@ export function BarberAptView(props) {
     )
   }
   
-  const handleInputChange = (e) => {
-    // Need to set state of note
+  const handleInputChange = (e, user_id) => {
+    dispatch({type: 'UPDATE_NOTE' , payload: {user_id: user_id, notes: e.target.value}})
+    console.log('notes e.target.value', e.target.value);
   }
 
   const classes = useStyles();
@@ -70,7 +71,7 @@ export function BarberAptView(props) {
                           rows={4}
                           defaultValue={apt.notes}
                           variant="filled"
-                          onChange={(event) => handleInputChange(event)}
+                          onChange={(e) => handleInputChange(e, apt.user_id)}
                         />
                       </div>
                     )
