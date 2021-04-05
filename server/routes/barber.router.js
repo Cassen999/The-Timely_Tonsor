@@ -5,12 +5,11 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
+  // Gets all open appointments for all barbers
 router.get('/', rejectUnauthenticated, (req, res) => {
-    // GETs all open appointments
     const sqlText = `SELECT * FROM "user" WHERE "is_barber" = true;`;
     pool.query(sqlText)
     .then((result) => {
-        console.log(`barber router result.rows ${result.rows}`)
         res.send(result.rows)
     })
     .catch((error) => {

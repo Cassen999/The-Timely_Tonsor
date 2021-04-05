@@ -1,8 +1,9 @@
+
+// Holds logged in client's appointment history
 const aptHistoryReducer = (state = [], action) => {
     const newData = Object.entries(state)
     switch (action.type) {
       case 'SET_HISTORY':
-        console.log('apt history action.payload', action.payload)
         return action.payload;
       case 'UNSET_HISTORY':
         return [];

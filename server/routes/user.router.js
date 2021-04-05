@@ -16,8 +16,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 // Handles POST request with new user data
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
@@ -40,24 +38,19 @@ router.post('/register', (req, res, next) => {
 });
 
 // Handles login form authenticate/login POST
-// userStrategy.authenticate('local') is middleware that we run on this route
-// this middleware will run our POST if successful
-// this middleware will send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   res.sendStatus(200);
 });
-
-// clear all server session information about this user
+// clears all server session information about this user
 router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);
 });
 
+// Updates user's edited profile info
 router.put('/id', (req,res) => {
-  console.log('In router.put')
   const id = req.user.id;
-  console.log('params', req.body, id)
   const sqlText = `UPDATE "user" SET username=$1, first_name=$2,
     last_name=$3, phone_number=$4 WHERE id=${id} 
     RETURNING id`

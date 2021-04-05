@@ -2,12 +2,10 @@ const express = require('express');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
-const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-const userStrategy = require('../strategies/user.strategy');
-
 const router = express.Router();
 
+// Sets a new appointment
 router.post('/', rejectUnauthenticated, (req, res, next) => {
     const user_id = req.body.user_id;
     const apt_id = req.body.apt_id;

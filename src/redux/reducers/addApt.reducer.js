@@ -1,3 +1,5 @@
+
+// Holds the info for the appointment that is being scheduled
 const AddAptReducer = (state = {}, action) => {
     const newData = Object.entries(state)
     switch (action.type) {

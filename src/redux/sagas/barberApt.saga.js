@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+// Gets barber's appointments and sends them to the barberApt reducer
 function* fetchBarberApt(action) {
     const id = action.payload.id
     const date = action.payload.date
@@ -13,6 +14,7 @@ function* fetchBarberApt(action) {
     }
 }
 
+// Gets a single appointment's details and sends to barberApt reducer
 function* fetchAptDetails(action) {
   const aptSlot_id = action.payload
   console.log(aptSlot_id)
@@ -25,10 +27,10 @@ function* fetchAptDetails(action) {
   }
 }
 
+// Updates client's notes, used by the barber in barberAptView
 function* updateClientNotes(action) {
   console.log('updateClientNotes action.payload', action.payload)
   try {
-    console.log('Update client notes action.payload', action.payload)
     yield axios.put(`/api/barberApt/notes`, action.payload)
   }
   catch(error) {

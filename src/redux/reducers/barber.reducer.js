@@ -1,8 +1,9 @@
+
+// Holds which barbers are available
 const barberReducer = (state = [], action) => {
     const newData = Object.entries(state)
     switch (action.type) {
       case 'SET_BARBERS':
-        console.log('barberReducer action.payload', action.payload)
         return action.payload;
       case 'UNSET_BARBERS':
         return [];

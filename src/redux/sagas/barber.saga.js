@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+// Gets barbers and sends them to the barber reducer
 function* fetchBarbers() {
     try {
         const response = yield axios.get('/api/barbers')

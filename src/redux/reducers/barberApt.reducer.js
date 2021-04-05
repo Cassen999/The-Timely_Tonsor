@@ -1,3 +1,5 @@
+
+// Holds the appointment to be scheduled
 const appointmentReducer = (state = {}, action) => {
     const newData = Object.entries(state)
     const initialState = []

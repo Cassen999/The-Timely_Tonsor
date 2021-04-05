@@ -30,7 +30,6 @@ const {
   // Used when a barber clicks an appointment on their schedule
   router.get('/aptDetails', rejectUnauthenticated, (req, res) => {
     let aptSlot_id = Number(req.query.aptSlot_id)
-    console.log(aptSlot_id)
     const sqlText = `SELECT "UA".id, "UA".user_id, "user".first_name, 
                       "user".last_name, "user".phone_number, "user".notes,
                       "AS".dotw, "AS".start_time, "UA".date
@@ -41,7 +40,6 @@ const {
     pool.query(sqlText, [aptSlot_id])
     .then((result) => {
       res.send(result.rows)
-      console.log('aptDetails result.rows', result.rows)
     })
     .catch((error) => {
       console.log('ERROR making aptDetails get', error)

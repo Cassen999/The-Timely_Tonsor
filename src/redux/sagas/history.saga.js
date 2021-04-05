@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+// Gets appointment history of user, sends to history reducer
 function* fetchHistory(action) {
     try {
         const response = yield axios.get(`/api/history/${action.payload}`)
