@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './BarberAptView.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,20 +7,26 @@ import { Button, TextField } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 
 
-export function BarberAptView(props) {
+function BarberAptView(props) {
+
+  // const apt = useSelector(state => state.aptDetails)
 
   const appointment = props.store.aptDetails
 
-  const [notes, setNotes] = useState(' ');
+  const [notes, setNotes] = useState('');
+  // const [appointment, setApt] = useState()
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    {appointment.map((apt) => {
-      dispatch({type: 'FETCH_APT_DETAILS', payload: apt.appt_id})
-      setNotes(apt.notes)
-    })}
-  }, [])
+  // useEffect(() => {
+  //   // {appointment.map((apt) => {
+  //   //   dispatch({type: 'FETCH_APT_DETAILS', payload: apt.appt_id})
+  //   //   setNotes(apt.notes)
+  //   // })}
+  //   // dispatch({type: 'FETCH_APT_DETAILS', payload: appointment.appt_id})
+  //   setApt(apt)
+  //   console.log(appointment)
+  // }, [])
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,14 +54,15 @@ export function BarberAptView(props) {
     )
   }
 
+  // Sets the state to the input field for notes
   const handleInputChange = (e) => {
     setNotes(e.target.value)
-    console.log('notes e.target.value', e.target.value);
-    console.log('state notes', notes)
   }
 
-  const saveChanges = (user_id) => {
+  // Dispatches new notes and refreshes the reducer
+  const saveChanges = (user_id, appt_id) => {
     dispatch({type: 'UPDATE_NOTE' , payload: {user_id: user_id, notes: notes}})
+    dispatch({type: 'FETCH_APT_DETAILS', payload: appt_id})
   }
 
   const classes = useStyles();
@@ -97,13 +104,16 @@ export function BarberAptView(props) {
                           size="small"
                           className={classes.button}
                           startIcon={<SaveIcon />}
-                          onClick={() => {saveChanges(apt.user_id)}}
+                          // Send the appt_id so I can get new note data
+                          // to display current saved note in text box
+                          onClick={() => {saveChanges(apt.user_id, apt.appt_id)}}
                         >
                           Save Changes
                         </Button>
                       </div>
                     )
                   })}
+                  
                 </div>
               </div>
             </div>
@@ -112,10 +122,12 @@ export function BarberAptView(props) {
       </div>
     )
   }
-
+  // const {first_name, last_name} = appointment
   return (
     <div>
       {renderDetails(appointment)}
+      {/* {JSON.stringify(first_name)}
+      <h2>{first_name}</h2> */}
     </div>
   );
 }

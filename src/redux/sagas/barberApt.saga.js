@@ -29,7 +29,8 @@ function* fetchAptDetails(action) {
 
 // Updates client's notes, used by the barber in barberAptView
 function* updateClientNotes(action) {
-  console.log('updateClientNotes action.payload', action.payload)
+  const aptSlot_id = action.payload
+  console.log('updateClientNotes action.payload', action.payload, aptSlot_id)
   try {
     yield axios.put(`/api/barberApt/notes`, action.payload)
   }
