@@ -70,14 +70,21 @@ class BarberLandingPage extends Component {
   convertDigitIn(date){
     let splitDate = date.split('-')
     console.log('converted date', splitDate)
-    let month = splitDate[1]
-    let day = splitDate[2]
+    let month = 0
+    let day = 0
     let year = splitDate[0]
-    console.log('month day year', month, day, year)
+    // START HERE!!!!!!!!
+    for(let i = 1; i < splitDate[3]; i++){
+      month = splitDate[i].splice()
+    }
+    // if(splitDate[1][0] === '0'){
+    //   month = splitDate[1].splice()
+    // }
     let newDate = `${month}/${day}/${year}`
     this.setState({
       date: newDate
     })
+    console.log('month day year', month, day, year)
   }
 
   state = {
@@ -86,7 +93,6 @@ class BarberLandingPage extends Component {
 
   handleSelectDate = (event) => {
     this.convertDigitIn(event.target.value)
-    console.log('event value for date picker', event.target.value)
     this.props.dispatch({type: 'FETCH_BARBER_APT', 
       payload: {id: this.props.store.user.id, date: event.target.value}})
     console.log(this.state)
