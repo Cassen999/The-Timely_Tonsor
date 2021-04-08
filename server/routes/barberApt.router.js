@@ -32,7 +32,7 @@ const {
     let aptSlot_id = Number(req.query.aptSlot_id)
     const sqlText = `SELECT "UA".id, "UA".user_id, "user".first_name, 
                       "user".last_name, "user".phone_number, "user".notes,
-                      "AS".dotw, "AS".start_time, "UA".date
+                      "AS".dotw, "AS".start_time, "UA".date, "UA".appt_id
                       FROM "user_appointment" AS "UA"
                       JOIN "user" ON "user".id = "UA".user_id
                       JOIN "appointment_slots" AS "AS" ON "AS".id = "UA".appt_id

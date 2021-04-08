@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import './BarberAptView.css';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { Button, TextField } from '@material-ui/core';
+import SaveIcon from '@material-ui/icons/Save';
+
 
 export function BarberAptView(props) {
 
-  const [heading, setHeading] = useState('Appointment Details');
-
   const appointment = props.store.aptDetails
 
+  const [notes, setNotes] = useState(' ');
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    {appointment.map((apt) => {
+      dispatch({type: 'FETCH_APT_DETAILS', payload: apt.appt_id})
+      setNotes(apt.notes)
+    })}
+  }, [])
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +29,9 @@ export function BarberAptView(props) {
         width: '25ch',
       },
       background: 'white'
+    },
+    button: {
+      margin: theme.spacing(1),
     },
   }));
 
@@ -35,10 +47,15 @@ export function BarberAptView(props) {
       `+1 (${p[0]}${p[1]}${p[2]})-${p[3]}${p[4]}${p[5]}-${p[6]}${p[7]}${p[8]}${p[9]}`
     )
   }
-  
-  const handleInputChange = (e, user_id) => {
-    dispatch({type: 'UPDATE_NOTE' , payload: {user_id: user_id, notes: e.target.value}})
+
+  const handleInputChange = (e) => {
+    setNotes(e.target.value)
     console.log('notes e.target.value', e.target.value);
+    console.log('state notes', notes)
+  }
+
+  const saveChanges = (user_id) => {
+    dispatch({type: 'UPDATE_NOTE' , payload: {user_id: user_id, notes: notes}})
   }
 
   const classes = useStyles();
@@ -65,14 +82,25 @@ export function BarberAptView(props) {
                         </h4>
                         <TextField
                           id="outlined-multiline-static"
+                          key={i}
                           className={classes.root}
                           label="Client Notes"
                           multiline
                           rows={4}
                           defaultValue={apt.notes}
                           variant="filled"
-                          onChange={(e) => handleInputChange(e, apt.user_id)}
+                          onChange={(e) => handleInputChange(e)}
                         />
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="small"
+                          className={classes.button}
+                          startIcon={<SaveIcon />}
+                          onClick={() => {saveChanges(apt.user_id)}}
+                        >
+                          Save Changes
+                        </Button>
                       </div>
                     )
                   })}
@@ -87,7 +115,6 @@ export function BarberAptView(props) {
 
   return (
     <div>
-      <h2>{heading}</h2>
       {renderDetails(appointment)}
     </div>
   );
