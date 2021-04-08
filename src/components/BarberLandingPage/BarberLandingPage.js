@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-import LogoutButtonStyled from '../LogOutButtonStyled/LogOutButtonStyled';
+import Toolbar from '@material-ui/core/Toolbar';
 import './BarberLandingPage.css';
 
 const styles = theme => ({
@@ -53,15 +53,26 @@ class BarberLandingPage extends Component {
 
   componentDidMount() {
     // Fetches current date on mount and displays on apt table
+    this.getDate()
+  }
+
+  convertDigitIn(date){
+    return date.split('/').reverse().join('/');
+  }
+
+  getDate = () => {
     let today = new Date()
     let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    this.setState({
+      date: date
+    })
     this.props.dispatch({type: 'FETCH_BARBER_APT', 
       payload: {id: this.props.store.user.id, date: date}})
-    console.log(date)
   }
 
   state = {
-    date: ''
+    date: '',
+    formattedDate: ''
   }
 
   handleSelectDate = (event) => {
@@ -94,7 +105,6 @@ class BarberLandingPage extends Component {
         <div className="panel">
           <div className="scrim">
             <h2>Welcome {this.props.store.user.first_name}</h2>
-            <h3>Choose a date to view schedule</h3>
           </div>
         <form onSubmit={this.selectDate} className={classes.container} noValidate>
           <div className={classes.schedPicker}>
@@ -116,6 +126,7 @@ class BarberLandingPage extends Component {
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
+                  <Toolbar>{this.convertDigitIn(this.state.date)}</Toolbar>
                     <TableRow>
                         <TableCell align="right">Appointment Date</TableCell>
                         <TableCell align="right">Appointment Time</TableCell>
@@ -150,9 +161,6 @@ class BarberLandingPage extends Component {
                 </TableBody>
             </Table>
         </Paper>
-        <div className="logoutBtn">
-          <LogoutButtonStyled />
-        </div>
         </div>
       </div>
     );

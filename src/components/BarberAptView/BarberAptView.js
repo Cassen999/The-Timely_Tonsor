@@ -9,24 +9,11 @@ import SaveIcon from '@material-ui/icons/Save';
 
 function BarberAptView(props) {
 
-  // const apt = useSelector(state => state.aptDetails)
-
   const appointment = props.store.aptDetails
 
   const [notes, setNotes] = useState('');
-  // const [appointment, setApt] = useState()
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   // {appointment.map((apt) => {
-  //   //   dispatch({type: 'FETCH_APT_DETAILS', payload: apt.appt_id})
-  //   //   setNotes(apt.notes)
-  //   // })}
-  //   // dispatch({type: 'FETCH_APT_DETAILS', payload: appointment.appt_id})
-  //   setApt(apt)
-  //   console.log(appointment)
-  // }, [])
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -122,12 +109,10 @@ function BarberAptView(props) {
       </div>
     )
   }
-  // const {first_name, last_name} = appointment
+
   return (
     <div>
       {renderDetails(appointment)}
-      {/* {JSON.stringify(first_name)}
-      <h2>{first_name}</h2> */}
     </div>
   );
 }
