@@ -56,13 +56,10 @@ class BarberLandingPage extends Component {
     this.getDate()
   }
 
-  convertDigitIn(date){
-    return date.split('/').reverse().join('/');
-  }
-
   getDate = () => {
     let today = new Date()
-    let date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+    console.log('date', date)
     this.setState({
       date: date
     })
@@ -70,18 +67,31 @@ class BarberLandingPage extends Component {
       payload: {id: this.props.store.user.id, date: date}})
   }
 
+  convertDigitIn(date){
+    let splitDate = date.split('-')
+    console.log('converted date', splitDate)
+    let month = splitDate[1]
+    let day = splitDate[2]
+    let year = splitDate[0]
+    console.log('month day year', month, day, year)
+    let newDate = `${month}/${day}/${year}`
+    this.setState({
+      date: newDate
+    })
+  }
+
   state = {
-    date: '',
-    formattedDate: ''
+    date: ''
   }
 
   handleSelectDate = (event) => {
-    this.setState({
-      date: event.target.value,
-    });
+    this.convertDigitIn(event.target.value)
+    console.log('event value for date picker', event.target.value)
     this.props.dispatch({type: 'FETCH_BARBER_APT', 
       payload: {id: this.props.store.user.id, date: event.target.value}})
+    console.log(this.state)
   }
+
 
   handleDelete = (appt_id, id, date) => {
     this.props.dispatch({type: 'DELETE', payload: {aptId: appt_id, userId: id, date: date, 
@@ -126,7 +136,7 @@ class BarberLandingPage extends Component {
         <Paper className={classes.root}>
             <Table className={classes.table}>
                 <TableHead>
-                  <Toolbar>{this.convertDigitIn(this.state.date)}</Toolbar>
+                  <Toolbar>{this.state.date}</Toolbar>
                     <TableRow>
                         <TableCell align="right">Appointment Date</TableCell>
                         <TableCell align="right">Appointment Time</TableCell>
