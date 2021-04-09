@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Toolbar from '@material-ui/core/Toolbar';
+import DateConverter from '../DateConverter/DateConverter';
 import './BarberLandingPage.css';
 
 const styles = theme => ({
@@ -49,16 +50,20 @@ const styles = theme => ({
     return (date = new Date(date).toDateString());
   };
   class BarberLandingPage extends Component {
+
+    state = {
+      date: ''
+    }
     
     componentDidMount() {
       // Fetches current date on mount and displays on apt table
       this.getDate()
     }
     
+    // Used for the component did mount, gives an initial date for apt table
     getDate = () => {
       let today = new Date()
       let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
-      console.log('date', date)
       this.setState({
         date: date
       })
@@ -66,10 +71,18 @@ const styles = theme => ({
       payload: {id: this.props.store.user.id, date: date}})
     }
     
+    // Called when a date is selected from date picker
+    handleSelectDate = (event) => {
+      // Calls convertDigitIn to convert date to mm/dd/yyyy
+      this.convertDigitIn(event.target.value)
+      this.props.dispatch({type: 'FETCH_BARBER_APT', 
+        payload: {id: this.props.store.user.id, date: event.target.value}})
+    }
+    
+    // Sets the state to selected converted date 
     convertDigitIn(date){
     let splitDate = date.split('-')
     let month = this.setMonth(splitDate)
-    console.log('month in convertDigitIn', month)
     let day = this.setDay(splitDate)
     let year = splitDate[0]
     let newDate = `${month}/${day}/${year}`
@@ -78,30 +91,19 @@ const styles = theme => ({
     })
   }
 
+  // Converts month to a number to display mm as m if single digit
   setMonth(month){
     for(let i = 1; i < month.length; i++){
       return month = Number(month[i][1])
     }
-    console.log('final month', month)
   }
 
+  // Converts day to a number to display dd as d if single digit
   setDay(day){
     for(let j = 2; j < day.length; j++) {
       return day = Number(day[j])
     }
   }
-
-  state = {
-    date: ''
-  }
-
-  handleSelectDate = (event) => {
-    this.convertDigitIn(event.target.value)
-    this.props.dispatch({type: 'FETCH_BARBER_APT', 
-      payload: {id: this.props.store.user.id, date: event.target.value}})
-    console.log(this.state)
-  }
-
 
   handleDelete = (appt_id, id, date) => {
     this.props.dispatch({type: 'DELETE', payload: {aptId: appt_id, userId: id, date: date, 
