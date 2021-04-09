@@ -48,43 +48,47 @@ const styles = theme => ({
   const handleDate = (date) => {
     return (date = new Date(date).toDateString());
   };
-
-class BarberLandingPage extends Component {
-
-  componentDidMount() {
-    // Fetches current date on mount and displays on apt table
-    this.getDate()
-  }
-
-  getDate = () => {
-    let today = new Date()
-    let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
-    console.log('date', date)
-    this.setState({
-      date: date
-    })
-    this.props.dispatch({type: 'FETCH_BARBER_APT', 
-      payload: {id: this.props.store.user.id, date: date}})
-  }
-
-  convertDigitIn(date){
-    let splitDate = date.split('-')
-    console.log('converted date', splitDate)
-    let month = 0
-    let day = 0
-    let year = splitDate[0]
-    // START HERE!!!!!!!!
-    for(let i = 1; i < splitDate[3]; i++){
-      month = splitDate[i].splice()
+  class BarberLandingPage extends Component {
+    
+    componentDidMount() {
+      // Fetches current date on mount and displays on apt table
+      this.getDate()
     }
-    // if(splitDate[1][0] === '0'){
-    //   month = splitDate[1].splice()
-    // }
+    
+    getDate = () => {
+      let today = new Date()
+      let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+      console.log('date', date)
+      this.setState({
+        date: date
+      })
+      this.props.dispatch({type: 'FETCH_BARBER_APT', 
+      payload: {id: this.props.store.user.id, date: date}})
+    }
+    
+    convertDigitIn(date){
+    let splitDate = date.split('-')
+    let month = this.setMonth(splitDate)
+    console.log('month in convertDigitIn', month)
+    let day = this.setDay(splitDate)
+    let year = splitDate[0]
     let newDate = `${month}/${day}/${year}`
     this.setState({
       date: newDate
     })
-    console.log('month day year', month, day, year)
+  }
+
+  setMonth(month){
+    for(let i = 1; i < month.length; i++){
+      return month = Number(month[i][1])
+    }
+    console.log('final month', month)
+  }
+
+  setDay(day){
+    for(let j = 2; j < day.length; j++) {
+      return day = Number(day[j])
+    }
   }
 
   state = {
