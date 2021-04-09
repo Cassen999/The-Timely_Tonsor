@@ -12,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Toolbar from '@material-ui/core/Toolbar';
-import DateConverter from '../DateConverter/DateConverter';
 import './BarberLandingPage.css';
 
 const styles = theme => ({
@@ -49,6 +48,7 @@ const styles = theme => ({
   const handleDate = (date) => {
     return (date = new Date(date).toDateString());
   };
+
   class BarberLandingPage extends Component {
 
     state = {
@@ -105,24 +105,28 @@ const styles = theme => ({
     }
   }
 
+  // Deletes clicked appointment
   handleDelete = (appt_id, id, date) => {
     this.props.dispatch({type: 'DELETE', payload: {aptId: appt_id, userId: id, date: date, 
       barberId: this.props.store.user.id}})
-    console.log('handle delete event', appt_id)
   }
 
+  // Brings the barber to the detailed appointment view
   aptDetailClick = (aptSlot_id) => {
-    console.log('aptSlot_id barberlandingpage', aptSlot_id)
     this.props.dispatch({type: 'FETCH_APT_DETAILS', payload: aptSlot_id})
     this.props.history.push("/barberAptView")
   }
     
   render() {
+    // isDateAfterToday checks if the appointment date is in the future
     const isDateAfterToday = (date) => {
       return new Date(date.toDateString()) >= new Date(new Date().toDateString());
     };
+
     const { classes } = this.props;
+
     return (
+      // divs structured in this way to show the fading black background
       <div className="container">
         <div className="panel">
           <div className="scrim">
@@ -158,7 +162,7 @@ const styles = theme => ({
                 <TableBody>
                     {this.props.store.barberApt.map((apt, i) => {
                       return( 
-                        // On click to detailed view goes on the table row
+                        // Click the table row to be brought to detailed view
                         <TableRow key={i}
                           onClick={() => this.aptDetailClick(apt.appt_id)}
                           className="clickable">
@@ -166,6 +170,7 @@ const styles = theme => ({
                           <TableCell align="right">{apt.start_time}</TableCell>
                           <TableCell align="right">{apt.first_name}</TableCell>
                           <TableCell className="deleteBtn" value={apt.appt_id}>
+                          {/* If isDateAfterToday comes back true, delete button is displayed */}
                           {isDateAfterToday(new Date(apt.date)) ? 
                             <Button
                               align="center"

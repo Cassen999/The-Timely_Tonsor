@@ -54,9 +54,11 @@ function BarberAptView(props) {
 
   const classes = useStyles();
 
+  // This is not the main render!!!!
   const renderDetails = (appointment) => {
     return(
       <div>
+        {/* panel and scrim to show faded black background */}
         <div className="container">
           <div className="panel">
             <div className="scrim">
@@ -100,7 +102,6 @@ function BarberAptView(props) {
                       </div>
                     )
                   })}
-                  
                 </div>
               </div>
             </div>
@@ -110,6 +111,7 @@ function BarberAptView(props) {
     )
   }
 
+  // This is the main return
   return (
     <div>
       {renderDetails(appointment)}
